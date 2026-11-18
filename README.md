@@ -17,7 +17,6 @@ The skills:
 - **Rails:** `dhh-rails`.
 - **Writing:** `unslop`, `html-communication`, `html-upload`.
 - **Planning:** `grill-me`, `grilling`.
-- **Finding skills:** `find-skills`.
 
 Also here:
 
