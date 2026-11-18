@@ -14,8 +14,8 @@ and all bundled references below.
 - Apply the Ruby naming, domain modeling, REST routing, small controller, job,
   persistence, and simplicity guidance within the requested change.
 - Preserve the project's frontend. In Rails + React + Inertia applications,
-  use the installed Inertia Rails skills for rendering, props, forms, redirects,
-  navigation, and TypeScript. Do not introduce Turbo/Stimulus or replace React,
+  follow the project's existing Inertia patterns for rendering, props, forms,
+  redirects, navigation, and TypeScript. Do not introduce Turbo/Stimulus or replace React,
   Inertia, Tailwind, or shadcn to satisfy this style guide. Read the frontend
   reference only for an explicitly requested Hotwire task.
 - Preserve existing authorization and authentication approaches, test frameworks,

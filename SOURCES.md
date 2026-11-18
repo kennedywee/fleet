@@ -5,23 +5,9 @@ updated from upstream. Own skills are marked as such.
 
 | Skill | Scope | Source |
 |---|---|---|
-| `alba-inertia` | universal | unknown |
 | `ce-dhh-rails-style` | universal | unknown |
 | `html-communication` | universal | own |
 | `html-upload` | universal | own: github.com/kennedywee/html-upload |
-| `inertia-rails-architecture` | universal | unknown |
-| `inertia-rails-controllers` | universal | unknown |
-| `inertia-rails-forms` | universal | unknown |
-| `inertia-rails-pages` | universal | unknown |
-| `inertia-rails-setup` | universal | unknown |
-| `inertia-rails-testing` | universal | unknown |
-| `inertia-rails-typescript` | universal | unknown |
-| `shadcn-inertia` | universal | unknown |
-| `shadcn-svelte-inertia` | universal | unknown |
-| `shadcn-vue-inertia` | universal | unknown |
-| `ui-ux-pro-max` | universal | unknown |
-| `vercel-react-best-practices` | universal | unknown |
-| `web-design-guidelines` | universal | unknown |
 | `grilling` | codex | unknown |
 | `grill-me` | codex | unknown |
 | `hyperframes` | video | unknown |

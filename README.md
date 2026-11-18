@@ -9,7 +9,7 @@ Each folder is a **scope**. Its `.targets` file names the agents that get its sk
 
 | Folder | Goes to | What |
 |---|---|---|
-| `universal/` | Claude Code, Codex | Rails, Inertia, shadcn, UI and web skills, HTML write-ups |
+| `universal/` | Claude Code, Codex | `ce-dhh-rails-style`, `html-communication`, `html-upload` |
 | `codex/` | Codex | `grill-me`, `grilling` |
 | `video/` | Claude Code, `~/.agents` | HyperFrames and media skills |
 | `agents/` | `~/.agents` | `find-skills` |
