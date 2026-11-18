@@ -1,6 +1,5 @@
 # Frontend - DHH Rails Style
 
-<turbo_patterns>
 ## Turbo Patterns
 
 **Turbo Streams** for partial updates:
@@ -25,9 +24,7 @@ turbo_refreshes_with method: :morph, scroll: :preserve
 ```
 
 **No ViewComponents** - standard partials work fine.
-</turbo_patterns>
 
-<turbo_morphing>
 ## Turbo Morphing Best Practices
 
 **Listen for morph events** to restore client state:
@@ -58,9 +55,7 @@ document.addEventListener("turbo:morph-element", (event) => {
 | Pagination breaking | Use turbo frames with `refresh: :morph` |
 | Flickering on replace | Switch to morph instead of replace |
 | localStorage loss | Listen to `turbo:morph-element`, restore state |
-</turbo_morphing>
 
-<turbo_frames>
 ## Turbo Frames
 
 **Lazy loading** with spinner:
@@ -90,9 +85,7 @@ document.addEventListener("turbo:morph-element", (event) => {
 <%= turbo_stream_from @card %>
 <%= turbo_stream_from @card, :activity %>
 ```
-</turbo_frames>
 
-<stimulus_controllers>
 ## Stimulus Controllers
 
 52 controllers in Fizzy, split 62% reusable, 38% domain-specific.
@@ -224,9 +217,7 @@ export default class extends Controller {
   }
 }
 ```
-</stimulus_controllers>
 
-<stimulus_best_practices>
 ## Stimulus Best Practices
 
 **Values API** over getAttribute:
@@ -268,9 +259,7 @@ export function debounce(fn, delay) {
 ```javascript
 this.dispatch("selected", { detail: { id: this.idValue } })
 ```
-</stimulus_best_practices>
 
-<view_helpers>
 ## View Helpers (Stimulus-Integrated)
 
 **Dialog helper:**
@@ -316,9 +305,7 @@ def copy_button(content:, label: "Copy")
   )
 end
 ```
-</view_helpers>
 
-<css_architecture>
 ## CSS Architecture
 
 Vanilla CSS with modern features, no preprocessors.
@@ -396,9 +383,7 @@ Vanilla CSS with modern features, no preprocessors.
 - `:has()` for parent selection
 - Logical properties (`margin-inline`, `padding-block`)
 - Container queries
-</css_architecture>
 
-<view_patterns>
 ## View Patterns
 
 **Standard partials** - no ViewComponents:
@@ -408,7 +393,6 @@ Vanilla CSS with modern features, no preprocessors.
   <%= render "cards/header", card: card %>
   <%= render "cards/body", card: card %>
   <%= render "cards/footer", card: card %>
-</article>
 ```
 
 **Fragment caching:**
@@ -431,9 +415,7 @@ Vanilla CSS with modern features, no preprocessors.
 .card.golden { }
 .card.closed { }
 ```
-</view_patterns>
 
-<caching_with_personalization>
 ## User-Specific Content in Caches
 
 Move personalization to client-side JavaScript to preserve caching:
@@ -477,9 +459,7 @@ export default class extends Controller {
 ```
 
 Assignment dropdown updates independently without invalidating parent cache.
-</caching_with_personalization>
 
-<broadcasting>
 ## Broadcasting with Turbo Streams
 
 **Model callbacks** for real-time updates:
@@ -507,4 +487,3 @@ end
 ```
 
 **Scope by tenant** using `[Current.account, resource]` pattern.
-</broadcasting>

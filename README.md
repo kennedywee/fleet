@@ -25,7 +25,6 @@ Also here:
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
 - `skills.txt`: upstream skills we use but do not keep here (`security-audit`). `install.sh`
   installs them for Claude Code and Codex with `npx skills`; `npx skills update -g` updates them.
-- `SOURCES.md`: the upstream source of each skill, to compare with later.
 
 **Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`.
 They control the Omarchy desktop and come with Omarchy and Superwhisper themselves.
@@ -67,8 +66,52 @@ Requirements: `greploop` and `greploop-apps` need Greptile installed on the repo
 
 Edit it here, commit, push. Each machine gets it on its next pull.
 
-- **Add a skill:** put its folder at the top level.
+- **Add a skill:** put its folder at the top level, and write it to the conventions below.
 - **Use an upstream skill as is:** add a line to `skills.txt`, or to `plugins.txt` if it is a
   Claude Code plugin.
+
+## Skill conventions
+
+Every skill here reads as one set, whoever wrote it first. A skill copied from another repo is
+rewritten to these rules when it comes in.
+
+**Frontmatter**
+
+- `name` and `description`, each on one line. Add another field only when it changes behavior
+  (`disable-model-invocation`, `allowed-tools`). Leave out author, version and license.
+- The description has up to three sentences. The first says what the skill does and starts with a
+  verb. The second starts with "Use when" and gives the triggers. An optional third starts with
+  "Not for". Put the user's trigger phrases in double quotes: `Use when the user says "full send".`
+
+**Body**
+
+- One `# Title`: the skill's name as words, in sentence case (`# Full send`).
+- Then one short paragraph that states the outcome. No "when to use" section: the description does
+  that.
+- `##` sections in sentence case, without numbers. Use a numbered list for steps in order, and
+  bullets for rules and cases. A step can start with a bold lead-in that ends in a period. A case
+  starts with a bold label that ends in a colon.
+- End with `## Report` when the skill ends with a report, and `## Requirements` when it needs tools
+  that may be missing.
+- Wrap prose at 100 columns.
+
+**Voice**
+
+- Follow the writing rules in `AGENTS.md`: short sentences, active voice, one idea per sentence.
+- Give instructions to the agent in the imperative. Call the human "the user".
+- Use "Never" for a hard limit and "Do not" for other rules.
+- No XML tags, no words in capitals for emphasis, no decorative emoji, no em dashes.
+- Do not mark what the fleet changed from upstream. The skill is ours.
+
+**Links**
+
+- Another skill: its name in backticks, as "the `file-pr` skill".
+- A bundled file: a relative link, as `[GitHub](references/github.md)`. Keep long reference material
+  in `references/` and tools in `scripts/`.
+
+**Codex metadata**
+
+- Every skill has `agents/openai.yaml` with `display_name`, `short_description` and
+  `default_prompt`.
 
 Keep this repo **private**.

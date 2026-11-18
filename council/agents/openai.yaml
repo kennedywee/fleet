@@ -1,0 +1,4 @@
+interface:
+  display_name: "Council"
+  short_description: "Get review from three models across three providers"
+  default_prompt: "Use $council to review this work."

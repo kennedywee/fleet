@@ -1,0 +1,4 @@
+interface:
+  display_name: "Greploop"
+  short_description: "Fix Greptile feedback in bounded review cycles"
+  default_prompt: "Use $greploop to address the Greptile feedback on this PR."

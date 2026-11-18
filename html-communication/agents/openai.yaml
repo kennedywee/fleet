@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML Communication"
+  short_description: "Write up work as a readable HTML page and publish it"
+  default_prompt: "Use $html-communication to explain this as an HTML page."

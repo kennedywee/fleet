@@ -1,0 +1,4 @@
+interface:
+  display_name: "Evidence-Driven Testing"
+  short_description: "Record visual proof while testing changed behavior"
+  default_prompt: "Use $evidence-driven-testing to test this change and record the proof."

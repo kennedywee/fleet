@@ -1,6 +1,5 @@
 # Architecture - DHH Rails Style
 
-<routing>
 ## Routing
 
 Everything maps to CRUD. Nested resources for related actions:
@@ -47,9 +46,7 @@ resolve("Comment") { |comment| [comment.card, anchor: dom_id(comment)] }
 
 # Now url_for(@comment) works correctly
 ```
-</routing>
 
-<multi_tenancy>
 ## Multi-Tenancy (Path-Based)
 
 **Middleware extracts tenant** from URL prefix:
@@ -111,9 +108,7 @@ end
 # Avoid - direct lookup
 @card = Card.find(params[:id])
 ```
-</multi_tenancy>
 
-<authentication>
 ## Authentication
 
 Custom passwordless magic link auth (~150 lines total):
@@ -168,9 +163,7 @@ module Authentication
     end
 end
 ```
-</authentication>
 
-<background_jobs>
 ## Background Jobs
 
 Jobs are shallow wrappers calling model methods:
@@ -244,9 +237,7 @@ class ProcessCardsJob < ApplicationJob
   end
 end
 ```
-</background_jobs>
 
-<database_patterns>
 ## Database Patterns
 
 **UUIDs as primary keys** (time-sortable UUIDv7):
@@ -299,9 +290,7 @@ class Card < ApplicationRecord
   default_scope { where(account: Current.account) }
 end
 ```
-</database_patterns>
 
-<current_attributes>
 ## Current Attributes
 
 Use `Current` for request-scoped state:
@@ -340,9 +329,7 @@ class Card < ApplicationRecord
   belongs_to :creator, default: -> { Current.user }
 end
 ```
-</current_attributes>
 
-<caching>
 ## Caching
 
 **HTTP caching** with ETags:
@@ -379,9 +366,7 @@ end
 - No Redis required
 - Consistent with application data
 - Simpler infrastructure
-</caching>
 
-<configuration>
 ## Configuration
 
 **ENV.fetch with defaults:**
@@ -420,9 +405,7 @@ config.content_security_policy do |policy|
   policy.script_src :self, *ENV.fetch("CSP_SCRIPT_SRC", "").split(",")
 end
 ```
-</configuration>
 
-<testing>
 ## Testing
 
 **Minitest**, not RSpec:
@@ -471,9 +454,7 @@ end
 **Tests ship with features** - same commit, not TDD-first but together.
 
 **Regression tests for security fixes** - always.
-</testing>
 
-<events>
 ## Event Tracking
 
 Events are the single source of truth:
@@ -507,9 +488,7 @@ end
 ```
 
 **Webhooks driven by events** - events are the canonical source.
-</events>
 
-<email_patterns>
 ## Email Patterns
 
 **Multi-tenant URL helpers:**
@@ -556,9 +535,7 @@ class ApplicationMailer < ActionMailer::Base
     end
 end
 ```
-</email_patterns>
 
-<security_patterns>
 ## Security Patterns
 
 **XSS prevention** - escape in helpers:
@@ -613,9 +590,7 @@ Rails.application.config.after_initialize do
   ]
 end
 ```
-</security_patterns>
 
-<active_storage>
 ## Active Storage Patterns
 
 **Variant preprocessing:**
@@ -650,4 +625,3 @@ production:
   primary: amazon
   mirrors: [google]
 ```
-</active_storage>

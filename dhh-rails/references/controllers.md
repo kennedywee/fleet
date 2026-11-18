@@ -1,6 +1,5 @@
 # Controllers - DHH Rails Style
 
-<rest_mapping>
 ## Everything Maps to CRUD
 
 Custom actions become new resources. Instead of verbs on existing resources, create noun resources:
@@ -28,9 +27,7 @@ end
 ```
 
 Each resource gets its own controller with standard CRUD actions.
-</rest_mapping>
 
-<controller_concerns>
 ## Concerns for Shared Behavior
 
 Controllers use concerns extensively. Common patterns:
@@ -64,9 +61,7 @@ end
 **ViewTransitions** - disables on page refresh
 **BlockSearchEngineIndexing** - sets X-Robots-Tag header
 **RequestForgeryProtection** - Sec-Fetch-Site CSRF (modern browsers)
-</controller_concerns>
 
-<authorization_patterns>
 ## Authorization Patterns
 
 Controllers check permissions via before_action, models define what permissions mean:
@@ -106,9 +101,7 @@ end
 ```
 
 Keep authorization simple, readable, colocated with domain.
-</authorization_patterns>
 
-<security_concerns>
 ## Security Concerns
 
 **Sec-Fetch-Site CSRF Protection:**
@@ -142,9 +135,7 @@ end
 ```
 
 Apply to: auth endpoints, email sending, external API calls, resource creation.
-</security_concerns>
 
-<request_context>
 ## Request Context Concerns
 
 **CurrentRequest** - populates Current with HTTP metadata:
@@ -201,9 +192,7 @@ module SetPlatform
   end
 end
 ```
-</request_context>
 
-<turbo_responses>
 ## Turbo Stream Responses
 
 Use Turbo Streams for partial updates:
@@ -228,9 +217,7 @@ For complex updates, use morphing:
 ```ruby
 render turbo_stream: turbo_stream.morph(@card)
 ```
-</turbo_responses>
 
-<api_patterns>
 ## API Design
 
 Same controllers, different format. Convention for responses:
@@ -269,9 +256,7 @@ end
 - Update: 204 No Content
 - Delete: 204 No Content
 - Bearer token authentication
-</api_patterns>
 
-<http_caching>
 ## HTTP Caching
 
 Extensive use of ETags and conditional GETs:
@@ -300,4 +285,3 @@ end
 ```
 
 Use `touch: true` on associations for cache invalidation.
-</http_caching>

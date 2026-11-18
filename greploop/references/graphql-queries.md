@@ -35,7 +35,6 @@ mutation {
 }
 ```
 
-For Greptile's summary comment, use the `body` returned by the review helper's
-`wait` command ([github.md](github.md)). The helper only accepts a summary that
-a trusted bot login updated after the trigger and that names the current head
-commit.
+For Greptile's summary comment, use the `body` returned by the review helper's `wait` command
+([github.md](github.md)). The helper only accepts a summary that a trusted bot login updated after
+the trigger and that names the current head commit.

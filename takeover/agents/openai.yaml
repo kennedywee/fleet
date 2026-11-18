@@ -1,0 +1,4 @@
+interface:
+  display_name: "Takeover"
+  short_description: "Take over existing work and finish its goal"
+  default_prompt: "Use $takeover to take over this PR and finish it."

@@ -1,6 +1,6 @@
 ---
 name: before-and-after
-description: Captures before/after screenshots of web pages or elements for visual comparison. Use when user says "take before and after", "screenshot comparison", "visual diff", "PR screenshots", "compare old and new", or needs to document UI changes. Accepts two URLs (file://, http://, https://) or two image paths.
+description: Capture before and after screenshots of web pages or elements for visual comparison. Use when the user says "take before and after", "screenshot comparison", "visual diff", "PR screenshots", or "compare old and new", or needs to document a UI change. Accepts two URLs (file://, http://, https://) or two image paths.
 allowed-tools:
   - Bash(npx @vercel/before-and-after *)
   - Bash(before-and-after *)
@@ -16,78 +16,74 @@ allowed-tools:
   - Bash(which gh)
 ---
 
-# Before-After Screenshot Skill
+# Before and after
 
-> **Package:** `@vercel/before-and-after`
-> Never use `before-and-after` (wrong package).
+Capture a matching pair of screenshots that shows a UI change, and deliver the pair where the task
+needs it.
 
-## Agent Behavior Rules
+The npm package is `@vercel/before-and-after`. With `npm` and `npx`, always use that full name. The
+npm package named `before-and-after` is a different package.
 
-**DO NOT:**
-- Switch branches or stash another task's changes.
-- Run the baseline and the changed app at the same time on this machine. They
-  share its ports and its database. See "Get the before state".
-- Use `--full` unless user explicitly asks for full page / full scroll capture
+## Rules
 
-**DO:**
-- Use `--markdown` when user wants PR integration or markdown output
-- Use `--mobile` / `--tablet` if user mentions phone, mobile, tablet, responsive, etc.
-- Reuse before captures, baseline URLs, and revision information already
-  established in the task. Confirm that they show the relevant behavior and
-  match the after capture's viewport and starting state.
-- Treat the current state as after only when the task context establishes it.
-  If the before state remains ambiguous after checking available context, ask
-  for the missing baseline. Do not ask again for a URL when a valid image pair
-  or earlier baseline is already available.
+- Do not switch branches or stash another task's changes.
+- Never run the baseline and the changed app at the same time on this machine. They share its ports
+  and its database. See "Get the before state".
+- Use `--full` only when the user explicitly asks for a full-page or full-scroll capture.
+- Use `--markdown` when the user wants PR integration or Markdown output.
+- Use `--mobile` or `--tablet` when the user mentions a phone, mobile, tablet, or responsive layout.
+- Reuse the before captures, baseline URLs, and revision information that the task already has.
+  Confirm that they show the relevant behavior and match the after capture's viewport and starting
+  state.
+- Treat the current state as the after only when the task context establishes it. If the before
+  state is still ambiguous after you check the available context, ask for the missing baseline. Do
+  not ask again for a URL when a valid image pair or an earlier baseline is already available.
 
 ## Get the before state
 
-<!-- fleet change: one task per machine, no worktrees. -->
+Each task runs on its own machine, with one checkout. Get the before in this order:
 
-Each task runs on its own machine, with one checkout. Get the "before" in this order:
-
-1. **Captured at the start.** `new-feature` takes before screenshots while the checkout is
+1. **Captured at the start.** The `new-feature` skill takes before screenshots while the checkout is
    still on fresh `main`, before any edit. Reuse them.
-2. **A deployed baseline.** If production or staging runs `main`, use its URL as the before.
-   Check access first.
-3. **A temporary clone, one server at a time.** Only when the task allows a baseline server:
+2. **A deployed baseline.** If production or staging runs `main`, use its URL as the before. Check
+   access first.
+3. **A temporary clone, one server at a time.** Use this only when the task allows a baseline
+   server:
    1. Stop the changed app's dev server.
-   2. `git clone --depth 1 --branch main <repo-url> /tmp/baseline-<task>`, install, and start
-      it on the **same port**. Capture the before.
-   3. Stop it, delete `/tmp/baseline-<task>`, and start the changed app again. Capture the
-      after.
+   2. Run `git clone --depth 1 --branch main <repo-url> /tmp/baseline-<task>`, install, and start
+      the app on the **same port**. Capture the before.
+   3. Stop it, delete `/tmp/baseline-<task>`, and start the changed app again. Capture the after.
 
    **Database:** if the branch added migrations, the old code can fail against the migrated
-   database. Give the baseline its own database (Rails: a separate `DATABASE_URL`, then
-   `bin/rails db:prepare`), or skip the before and say why. Never roll back migrations on the
-   shared database.
+   database. Give the baseline its own database (Rails: a separate `DATABASE_URL`, then `bin/rails
+   db:prepare`), or skip the before and say why. Never roll back migrations on the shared database.
 
 If none of these works, ask the user for the before images or a baseline URL.
 
-## Capture and delivery
+## Capture and deliver
 
-1. Use an installed `before-and-after` CLI or `npx @vercel/before-and-after`.
-2. For remote URLs, check access when needed. A 401/403 indicates protection.
-   Existing image pairs do not require a URL or deployment access check.
-3. Capture missing images with `before-and-after "<before-url>" "<after-url>"`.
-4. When the task calls for uploaded evidence or PR markdown, run
-   `before-and-after before.png after.png --markdown` once. For local capture
-   requests, deliver the files without uploading them.
-5. Append the markdown to the PR when PR integration is part of the task.
+1. Use an installed `before-and-after` CLI, or `npx @vercel/before-and-after`.
+2. For remote URLs, check access when needed. A 401 or 403 indicates protection. An existing image
+   pair needs no URL and no access check.
+3. Capture the missing images with `before-and-after "<before-url>" "<after-url>"`.
+4. When the task calls for uploaded evidence or PR Markdown, run `before-and-after before.png
+   after.png --markdown` once. For a local capture request, deliver the files without uploading
+   them.
+5. Append the Markdown to the PR when PR integration is part of the task.
 
-Resolve bundled script paths relative to this skill's directory, not the
-project working directory. Reuse earlier evidence instead of recapturing it.
+Resolve bundled script paths relative to this skill's folder, not the project's working directory.
+Reuse earlier evidence; do not capture it again.
 
-## Quick Reference
+## Command reference
 
 ```bash
 # Basic usage
 before-and-after <before-url> <after-url>
 
-# With selector
+# With a selector
 before-and-after url1 url2 ".hero-section"
 
-# Different selectors for each
+# A different selector for each
 before-and-after url1 url2 ".old-card" ".new-card"
 
 # Viewports
@@ -98,59 +94,60 @@ before-and-after url1 url2 --full      # full scroll
 # From existing images
 before-and-after before.png after.png --markdown
 
-# Via npx (use full package name!)
+# Through npx (use the full package name)
 npx @vercel/before-and-after url1 url2
 ```
 
 | Flag | Description |
-|------|-------------|
+| --- | --- |
 | `-m, --mobile` | Mobile viewport (375x812) |
 | `-t, --tablet` | Tablet viewport (768x1024) |
 | `--size <WxH>` | Custom viewport |
 | `-f, --full` | Full scrollable page |
 | `-s, --selector` | CSS selector to capture |
 | `-o, --output` | Output directory (default: ~/Downloads) |
-| `--markdown` | Upload images & output markdown table |
-| `--upload-url <url>` | Custom upload endpoint (no default: see Image Upload) |
+| `--markdown` | Upload the images and print a Markdown table |
+| `--upload-url <url>` | Custom upload endpoint (no default: see "Upload images") |
 
-## Image Upload
+## Upload images
 
-Uploading needs a host chosen on purpose (fleet change): nothing uploads by default, because
-screenshots of a private app must not become public by accident. Ask the user before uploading.
+Nothing uploads by default, because screenshots of a private app must not become public by accident.
+Uploading needs a host that the user chose on purpose. Ask the user before you upload.
 
 ```bash
-# 0x0.st: public, no signup. Only when the user agrees the images may be public.
+# 0x0.st: public, no signup. Only when the user agrees that the images may be public.
 IMAGE_ADAPTER=0x0st ./scripts/upload-and-copy.sh before.png after.png --markdown
 ```
 
-## Vercel Deployment Protection
+## Vercel deployment protection
 
-If `.vercel.app` URL returns 401/403:
+If a `.vercel.app` URL returns 401 or 403:
 
-1. Check Vercel CLI: `which vercel && vercel whoami`
-2. If available: `vercel inspect <url>` to get bypass token
-3. If not: Tell user to provide bypass token, take manual screenshots, or disable protection
+1. Check for the Vercel CLI: `which vercel && vercel whoami`.
+2. If it is available, run `vercel inspect <url>` to get a bypass token.
+3. If it is not, ask the user to provide a bypass token, take manual screenshots, or disable the
+   protection.
 
-## PR Integration
+## Add the comparison to a PR
 
 ```bash
-# Check for gh CLI
+# Check for the gh CLI
 which gh
 
-# Get current PR
+# Get the current PR
 gh pr view --json number,body
 
 # Write the existing body plus the comparison to a temporary file, then:
 gh pr edit <number> --body-file /path/to/pr-body.md
 ```
 
-If no `gh` CLI: output markdown and tell user to paste manually.
+If there is no `gh` CLI, print the Markdown and tell the user to paste it manually.
 
-## Error Reference
+## Errors
 
 | Error | Fix |
-|-------|-----|
+| --- | --- |
 | `command not found` | `npm install -g @vercel/before-and-after` |
-| `could not determine executable` | Use `npx @vercel/before-and-after` (full name) |
-| 401/403 on .vercel.app | See Vercel protection section |
-| Element not found | Verify selector exists on page |
+| `could not determine executable` | Use `npx @vercel/before-and-after` (the full name) |
+| 401 or 403 on `.vercel.app` | See "Vercel deployment protection" |
+| Element not found | Verify that the selector exists on the page |

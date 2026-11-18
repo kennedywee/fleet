@@ -1,6 +1,5 @@
 # Models - DHH Rails Style
 
-<model_concerns>
 ## Concerns for Horizontal Behavior
 
 Models heavily use concerns. A typical Card model includes 14+ concerns:
@@ -28,9 +27,7 @@ end
 Each concern is self-contained with associations, scopes, and methods.
 
 **Naming:** Adjectives describing capability (`Closeable`, `Publishable`, `Watchable`)
-</model_concerns>
 
-<state_records>
 ## State as Records, Not Booleans
 
 Instead of boolean columns, create separate records:
@@ -92,9 +89,7 @@ end
 Card.joins(:closure)         # closed cards
 Card.where.missing(:closure) # open cards
 ```
-</state_records>
 
-<callbacks>
 ## Callbacks - Used Sparingly
 
 Only 38 callback occurrences across 30 files in Fizzy. Guidelines:
@@ -120,9 +115,7 @@ class Card < ApplicationRecord
     end
 end
 ```
-</callbacks>
 
-<scopes>
 ## Scope Naming
 
 Standard scope names:
@@ -142,9 +135,7 @@ class Card < ApplicationRecord
   scope :sorted_by, ->(column, direction = :asc) { order(column => direction) }
 end
 ```
-</scopes>
 
-<poros>
 ## Plain Old Ruby Objects
 
 POROs namespaced under parent models:
@@ -179,9 +170,7 @@ end
 ```
 
 **NOT used for service objects.** Business logic stays in models.
-</poros>
 
-<verbs_predicates>
 ## Method Naming
 
 **Verbs** - Actions that change state:
@@ -211,9 +200,7 @@ card.update_golden_status(false)
 card.close
 card.ungild
 ```
-</verbs_predicates>
 
-<validation_philosophy>
 ## Validation Philosophy
 
 Minimal validations on models. Use contextual validations on form/operation objects:
@@ -246,9 +233,7 @@ end
 add_index :users, :email, unique: true
 add_foreign_key :cards, :boards
 ```
-</validation_philosophy>
 
-<error_handling>
 ## Let It Crash Philosophy
 
 Use bang methods that raise exceptions on failure:
@@ -267,9 +252,7 @@ end
 ```
 
 Let errors propagate naturally. Rails handles ActiveRecord::RecordInvalid with 422 responses.
-</error_handling>
 
-<default_values>
 ## Default Values with Lambdas
 
 Use lambda defaults for associations with Current:
@@ -286,7 +269,6 @@ end
 ```
 
 Lambdas ensure dynamic resolution at creation time.
-</default_values>
 
 <rails_71_patterns>
 ## Rails 7.1+ Model Patterns
@@ -322,7 +304,6 @@ user.notifications_enabled = true
 ```
 </rails_71_patterns>
 
-<concern_guidelines>
 ## Concern Guidelines
 
 - **50-150 lines** per concern (most are ~100)
@@ -356,4 +337,3 @@ class Card < ApplicationRecord
   end
 end
 ```
-</concern_guidelines>

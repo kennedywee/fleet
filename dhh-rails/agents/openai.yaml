@@ -1,0 +1,4 @@
+interface:
+  display_name: "DHH Rails"
+  short_description: "Apply DHH and 37signals Rails backend conventions"
+  default_prompt: "Use $dhh-rails to write or review this Rails code in DHH style."

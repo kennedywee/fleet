@@ -1,0 +1,4 @@
+interface:
+  display_name: "New Feature"
+  short_description: "Start a task on its own branch, without worktrees"
+  default_prompt: "Use $new-feature to start this task on its own branch."

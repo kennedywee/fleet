@@ -1,0 +1,4 @@
+interface:
+  display_name: "Greploop Apps"
+  short_description: "Run greploop with the @greptile-apps trigger"
+  default_prompt: "Use $greploop-apps to run the Greptile review loop on this large PR."

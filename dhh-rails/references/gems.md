@@ -1,6 +1,5 @@
 # Gems - DHH Rails Style
 
-<what_they_use>
 ## What 37signals Uses
 
 **Core Rails stack:**
@@ -30,9 +29,7 @@
 - thruster (HTTP/2 proxy)
 - mission_control-jobs (job monitoring)
 - autotuner (GC tuning)
-</what_they_use>
 
-<what_they_avoid>
 ## What They Deliberately Avoid
 
 **Authentication:**
@@ -125,9 +122,7 @@ Why: Server-rendered HTML with sprinkles of JS. SPA complexity not justified.
 RSpec → Minitest
 ```
 Why: Simpler, faster boot, less DSL magic, ships with Rails.
-</what_they_avoid>
 
-<testing_philosophy>
 ## Testing Philosophy
 
 **Minitest** - simpler, faster:
@@ -188,9 +183,7 @@ end
 ```
 
 **Tests ship with features** - same commit, not before or after.
-</testing_philosophy>
 
-<decision_framework>
 ## Decision Framework
 
 Before adding a gem, ask:
@@ -219,9 +212,7 @@ Before adding a gem, ask:
 > "Build solutions before reaching for gems."
 
 Not anti-gem, but pro-understanding. Use gems when they genuinely solve a problem you have, not a problem you might have.
-</decision_framework>
 
-<gem_patterns>
 ## Gem Usage Patterns
 
 **Pagination:**
@@ -263,4 +254,3 @@ end
 # config/environments/production.rb
 config.cache_store = :solid_cache_store
 ```
-</gem_patterns>
