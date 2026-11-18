@@ -58,6 +58,18 @@ Do not decide this from the branch prefix alone. Look at the branch's commits an
    Confirm the required runtime version. Install dependencies when the task's checks need them.
    Documentation-only work does not need the application's full toolchain.
 
+6. **Capture the before state** when the change affects what users see. The branch still
+   matches `main`, so run the app and take the before screenshots now. The tool takes two
+   URLs, so give the same page twice and keep the first image:
+
+   ```bash
+   npx @vercel/before-and-after "<url>" "<url>" -o ~/evidence/<task-name>/before
+   ```
+
+   Note the viewport and selector you used, and use the same ones for the after. Later,
+   `before-and-after` pairs the saved before image with the after. This avoids running an old
+   copy of the app next to the new one.
+
 ## Remember
 
 - One task per machine. A second task on the same machine shares its checkout, ports, and

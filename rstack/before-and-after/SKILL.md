@@ -24,10 +24,9 @@ allowed-tools:
 ## Agent Behavior Rules
 
 **DO NOT:**
-- Switch branches or stash another task's changes. For a baseline ("before")
-  server already authorized by the task, use a separate temporary clone, not a
-  worktree (fleet change): `git clone --depth 1 --branch main <repo-url>
-  /tmp/baseline-<task>`. Delete it when the capture is done.
+- Switch branches or stash another task's changes.
+- Run the baseline and the changed app at the same time on this machine. They
+  share its ports and its database. See "Get the before state".
 - Use `--full` unless user explicitly asks for full page / full scroll capture
 
 **DO:**
@@ -40,6 +39,30 @@ allowed-tools:
   If the before state remains ambiguous after checking available context, ask
   for the missing baseline. Do not ask again for a URL when a valid image pair
   or earlier baseline is already available.
+
+## Get the before state
+
+<!-- fleet change: one task per machine, no worktrees. -->
+
+Each task runs on its own machine, with one checkout. Get the "before" in this order:
+
+1. **Captured at the start.** `new-feature` takes before screenshots while the checkout is
+   still on fresh `main`, before any edit. Reuse them.
+2. **A deployed baseline.** If production or staging runs `main`, use its URL as the before.
+   Check access first.
+3. **A temporary clone, one server at a time.** Only when the task allows a baseline server:
+   1. Stop the changed app's dev server.
+   2. `git clone --depth 1 --branch main <repo-url> /tmp/baseline-<task>`, install, and start
+      it on the **same port**. Capture the before.
+   3. Stop it, delete `/tmp/baseline-<task>`, and start the changed app again. Capture the
+      after.
+
+   **Database:** if the branch added migrations, the old code can fail against the migrated
+   database. Give the baseline its own database (Rails: a separate `DATABASE_URL`, then
+   `bin/rails db:prepare`), or skip the before and say why. Never roll back migrations on the
+   shared database.
+
+If none of these works, ask the user for the before images or a baseline URL.
 
 ## Capture and delivery
 

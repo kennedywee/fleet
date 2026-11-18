@@ -64,6 +64,10 @@ Our changes to copied skills are marked "fleet change":
   the isolation. `new-feature` makes a branch in the machine's checkout and stops if the
   checkout holds another task's work. `modernize`, `greploop`, `before-and-after` and the
   `rstack-AGENTS.md` template follow the same rule.
+- **Before screenshots first.** `new-feature` captures the "before" while the branch still
+  matches `main`. `before-and-after` reuses it, or uses a deployed baseline, and only as a last
+  resort runs `main` from a temporary clone, one server at a time, with its own database when
+  migrations differ. Two copies of the app never run at once on one machine.
 - `before-and-after` never uploads unless a host is named (it defaulted to the public 0x0.st).
 
 Notes on Ras Mic's skills: `greploop` and `greploop-apps` need Greptile installed on the repo.
