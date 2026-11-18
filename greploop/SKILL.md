@@ -1,6 +1,6 @@
 ---
 name: greploop
-description: Address Greptile feedback on a PR, MR, or shelved changelist through bounded review and fix cycles. Use when the task includes a Greptile review loop. Supports the alternate @greptile-apps trigger for large PRs.
+description: Address Greptile feedback on a GitHub PR through bounded review and fix cycles. Use when the task includes a Greptile review loop. Supports the alternate @greptile-apps trigger for large PRs.
 ---
 
 # Greploop
@@ -11,34 +11,28 @@ checks and your judgment. It does not replace them.
 
 ## Inputs
 
-- A PR, MR, or changelist number. Infer it from the current task when it is omitted.
+- A PR number. Infer it from the current task when it is omitted.
 - `--max-iterations N`, a positive integer. The default is 10 review cycles.
 - `--trigger @greptile` by default, or `@greptile-apps` for the alternate route. Use the alternate
   when the normal trigger reports too many changed files.
-- `--vcs github|gitlab|perforce` when the repository context is ambiguous.
 
 Apply the user's existing authorization and task scope. A read-only review request does not
 authorize code edits or posting comments. Keep your own task's branch on this machine. Do not switch
 another task's checkout to the PR branch.
 
-## Choose the platform
+## The review helper
 
-Decide from the repository and session context, not from an installed executable alone. Read only
-the relevant reference:
-
-- [GitHub](references/github.md): the bundled helper tracks each trigger and waits for a scored
-  review tied to the current commit.
-- [GitLab](references/gitlab-api.md): use notes and resolvable discussions. CI pipeline activity
-  alone does not identify a Greptile review.
-- [Perforce](references/perforce.md): use the configured Swarm or site adapter.
+Read [references/github.md](references/github.md) before the first cycle. The bundled helper,
+`scripts/github_review.py`, tracks each trigger and waits for a scored review tied to the current
+commit.
 
 ## Review cycle
 
 1. **Prepare.** Confirm the target revision, clean task ownership, and the effective iteration cap.
-   Run the relevant checks before you publish edits, then push or shelve them.
-2. **Start one review attempt** with the platform reference. Record its trigger and revision. Wait
-   at most 10 minutes for fresh results. Do not reuse an earlier score just because it belongs to
-   the same commit.
+   Run the relevant checks before you publish edits, then push them.
+2. **Start one review attempt** with the review helper. Record its trigger and revision. Wait at
+   most 10 minutes for fresh results. Do not reuse an earlier score just because it belongs to the
+   same commit.
 3. **Read everything.** Read the entire fresh summary, including general-comment findings. Fetch all
    pages of unresolved Greptile threads. An empty inline-comment list does not prove that the
    summary contains no remaining work. Older unresolved threads stay relevant until addressed, even
@@ -49,8 +43,8 @@ the relevant reference:
    it. Do not change correct code merely to chase the score, and do not resolve other reviewers'
    threads.
 5. **Publish the fixes.** Run the checks for the fixes. Commit only task files, with explicit file
-   paths when staging. Push or re-shelve, then resolve the specific threads whose fixes are
-   published. If no code changed, skip the commit and the push.
+   paths when staging. Push, then resolve the specific threads whose fixes are published. If no code
+   changed, skip the commit and the push.
 6. **Repeat.** Start a new attempt for the resulting revision if the cap permits it. A changed head
    invalidates the old attempt. Do not reuse an attempt file, and do not retrigger merely because a
    poll has not returned yet.
@@ -65,13 +59,11 @@ a partial result complete.
 
 ## Report
 
-Give the PR/MR URL or changelist, the reviewed revision, the number of cycles, the current score,
-the checks you ran, the resolved findings, and the remaining findings. Separate a successful review
-from a timeout or a capped run. Do not merge unless the user asked.
+Give the PR URL, the reviewed revision, the number of cycles, the current score, the checks you ran,
+the resolved findings, and the remaining findings. Separate a successful review from a timeout or a
+capped run. Do not merge unless the user asked.
 
 ## Requirements
 
 - Greptile must be installed on the repository.
-- GitHub: Python 3.10+ and an authenticated `gh`.
-- GitLab: `glab`.
-- Perforce: `p4` and the site's review integration.
+- Python 3.10+ and an authenticated `gh`.

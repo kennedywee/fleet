@@ -33,8 +33,8 @@ Do not decide this from the branch prefix alone. Look at the branch's commits an
 2. **Check the scope.** Run `gh pr list`. Skim the changed files of the open PRs (`gh pr diff <n>
    --name-only`). For shared files, read the overlapping diffs. Independent edits can continue. Ask
    for direction only when the changes conflict in behavior, need another task's unfinished work, or
-   ownership is not clear. On another hosting platform, use its PR/MR tools. If they are not
-   available, say that the scope check was not done, and continue.
+   ownership is not clear. If `gh` is not available, say that the scope check was not done, and
+   continue.
 
 3. **Name the task.** Use lowercase words with hyphens, plus a short unique suffix. Example:
    `user-auth-0816a`. If the branch name exists, choose a different name. Never force or reuse.
