@@ -11,7 +11,6 @@ Each folder is a **scope**. Its `.targets` file names the agents that get its sk
 |---|---|---|
 | `universal/` | Claude Code, Codex | `ce-dhh-rails-style`, `html-communication`, `html-upload` |
 | `codex/` | Codex | `grill-me`, `grilling` |
-| `video/` | Claude Code, `~/.agents` | HyperFrames and media skills |
 | `agents/` | `~/.agents` | `find-skills` |
 | `pr/` | Claude Code, Codex | Theo's PR skills: `full-stop`, `full-send`, `file-pr`, `babysit-pr`, … |
 | `rstack/` | Claude Code, Codex | Ras Mic's stack: `new-feature`, `code-structure`, `evidence-driven-testing`, `before-and-after`, `unslop`, `greploop` |

@@ -10,10 +10,6 @@ updated from upstream. Own skills are marked as such.
 | `html-upload` | universal | own: github.com/kennedywee/html-upload |
 | `grilling` | codex | unknown |
 | `grill-me` | codex | unknown |
-| `hyperframes` | video | unknown |
-| `hyperframes-cli` | video | unknown |
-| `hyperframes-registry` | video | unknown |
-| `media-use` | video | unknown |
 | `find-skills` | agents | unknown |
 
 ## Copied from other people's repos
