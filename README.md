@@ -9,11 +9,12 @@ Each folder is a **scope**. Its `.targets` file names the agents that get its sk
 
 | Folder | Goes to | What |
 |---|---|---|
-| `universal/` | Claude Code, Codex | Rails, Inertia, shadcn, UI and web skills, HTML write-ups |
+| `universal/` | Claude Code, Codex | Rails, Inertia, shadcn, UI and web skills, HTML write-ups, `evidence-driven-testing` |
 | `claude/` | Claude Code | `impeccable`, `security-audit` |
 | `codex/` | Codex | `grill-me`, `grilling` |
 | `video/` | Claude Code, `~/.agents` | HyperFrames and media skills |
 | `agents/` | `~/.agents` | `find-skills` |
+| `pr/` | Claude Code, Codex | Theo's PR skills: `full-stop`, `full-send`, `file-pr`, `babysit-pr`, … |
 
 Targets: `claude` is `~/.claude/skills`, `codex` is `~/.codex/skills`, `agents` is `~/.agents/skills`.
 
@@ -21,7 +22,6 @@ Also here:
 
 - `AGENTS.md`: global instructions, linked as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
-- `upstream.txt`: skills from other people's repos, fetched at a pinned commit (see below).
 - `SOURCES.md`: where each third-party skill came from.
 
 **Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`.
@@ -41,16 +41,17 @@ wake.
 made: a real skill folder already on the machine is kept, unless you pass `--force`, which moves
 it aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
 
-## Upstream skills
+## Copied skills
 
-`upstream.txt` lists skills that stay in their authors' repos: Theo's PR skills
-([t3dotgg/tstack](https://github.com/t3dotgg/tstack), MIT) and Ras Mic's `evidence-driven-testing`
-([michaelshimeles/skills](https://github.com/michaelshimeles/skills), no license, so not copied
-here). `install.sh` fetches each repo at the **pinned commit** into `~/.cache/fleet/upstream` and
-links the skill folder, like the others.
+Some skills started as someone else's and are ours to change now:
 
-To update one, read what changed upstream, then put the new commit in `upstream.txt`. Pinning
-matters: agents follow skills with full permissions, so a skill should change only when you choose.
+- `pr/`: Theo's PR skills from [t3dotgg/tstack](https://github.com/t3dotgg/tstack), MIT. Keep
+  `licenses/tstack-MIT.txt` with them.
+- `universal/evidence-driven-testing`: Ras Mic's, from
+  [michaelshimeles/skills](https://github.com/michaelshimeles/skills). It has **no license**, so it
+  is here for private use only: never make this repo public with it inside.
+
+`SOURCES.md` records the commit each was copied from, to compare with upstream later.
 
 Notes on Theo's skills: `full-send` may **merge** the PR (only when you say "full send");
 `full-stop` does the same work and never merges. `council` and `sol-loop` ask other providers'

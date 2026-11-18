@@ -32,9 +32,9 @@ updated from upstream. Own skills are marked as such.
 | `media-use` | video | unknown |
 | `find-skills` | agents | unknown |
 
-## Upstream (not copied, see upstream.txt)
+## Copied from other people's repos
 
-| Skill | Source | License |
-|---|---|---|
-| `babysit-pr`, `council`, `file-pr`, `full-send`, `full-stop`, `leaving-pr-comments`, `modernize`, `sol-loop`, `takeover` | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) (Theo Browne) | MIT |
-| `evidence-driven-testing` | [michaelshimeles/skills](https://github.com/michaelshimeles/skills) (Ras Mic) | none stated |
+| Skill | Scope | Source | Copied at | License |
+|---|---|---|---|---|
+| `babysit-pr`, `council`, `file-pr`, `full-send`, `full-stop`, `leaving-pr-comments`, `modernize`, `sol-loop`, `takeover` | pr | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) (Theo Browne) | `11e37a7` | MIT, see `licenses/tstack-MIT.txt` |
+| `evidence-driven-testing` | universal | [michaelshimeles/skills](https://github.com/michaelshimeles/skills) (Ras Mic) | `11b1576` | none: private use only |
