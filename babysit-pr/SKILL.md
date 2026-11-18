@@ -5,8 +5,8 @@ description: Monitor a pull request through review and CI until it is ready. Use
 
 # Babysit PR
 
-Stay with a pull request until its checks pass and its review feedback is handled. Many repos have
-AI review bots. They help, although they are not always right.
+Stay with a pull request until its checks pass and its review feedback is handled. The review bot on
+these repos is Greptile. It helps, although it is not always right.
 
 ## Waiting
 
@@ -46,9 +46,9 @@ It prints one line per real event. It exits 0 when the `--until` condition is me
 1 when it needs you (a required check failed, conflicts, unresolved threads, PR closed), and 2 on
 bad input.
 
-- `ready` (default): required checks are green, Greptile or Macroscope reviewed the head, and no
-  threads are unresolved. Use this to babysit.
-- `green`: required checks only. Use it when the repo has no Greptile or Macroscope.
+- `ready` (default): required checks are green, Greptile reviewed the head, and no threads are
+  unresolved. Use this to babysit.
+- `green`: required checks only. Use it when the repo has no Greptile.
 - `any-change`: exit on the first event.
 
 In Claude Code, run it with the Monitor tool (`timeout_ms: 3600000`), so each line wakes you.
@@ -73,11 +73,6 @@ infrastructure flakes.
 When you dismiss a false positive, or feedback that is not worth addressing, reply with a written
 reason and resolve the comment. Use the `leaving-pr-comments` skill for every comment that you post
 for the user. Screenshots and videos help too, when you have a way to upload them.
-
-- **Macroscope:** if the repo has `.macroscope/check-run-agents/*.md`, read those rules before you
-  reply to a Macroscope finding. Its findings cite them.
-- **CodeRabbit:** it is advisory. Treat its findings like any other finding, but never wait for it
-  and never hold a merge for it.
 
 ## Keep the PR small
 
