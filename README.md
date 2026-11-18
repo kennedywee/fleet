@@ -58,8 +58,13 @@ Some skills started as someone else's and are ours to change now:
 
 `SOURCES.md` records the commit each was copied from, to compare with upstream later.
 
-Our changes to copied skills are marked "fleet change". So far: `before-and-after` never uploads
-unless a host is named (it defaulted to the public 0x0.st).
+Our changes to copied skills are marked "fleet change":
+
+- **One machine per task, no worktrees.** Each feature runs on its own t3boat VM, so the VM is
+  the isolation. `new-feature` makes a branch in the machine's checkout and stops if the
+  checkout holds another task's work. `modernize`, `greploop`, `before-and-after` and the
+  `rstack-AGENTS.md` template follow the same rule.
+- `before-and-after` never uploads unless a host is named (it defaulted to the public 0x0.st).
 
 Notes on Ras Mic's skills: `greploop` and `greploop-apps` need Greptile installed on the repo.
 `evidence-driven-testing` needs `ffmpeg`/`ffprobe`, and Node 20+ for its Playwright helper.

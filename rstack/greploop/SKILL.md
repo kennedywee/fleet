@@ -24,7 +24,7 @@ findings. The bot's score complements the project's checks and your judgment.
 
 Apply the user's existing authorization and task scope. A read-only review
 request does not authorize code edits or posting comments. Keep your own task's
-worktree and branch; do not switch another task's checkout to the PR branch.
+branch on this machine; do not switch another task's checkout to the PR branch.
 
 ## Choose the platform
 

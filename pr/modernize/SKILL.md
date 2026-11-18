@@ -14,8 +14,9 @@ PR still belongs in the product.
 
 - Always check to make sure you have pulled latest origin for your branch, main
   branch, and any other branch related to your work before starting.
-- Treat existing worktree changes as user-owned. Use a disposable worktree when
-  the active worktree is dirty or is being used for other work.
+- Treat uncommitted changes as user-owned. Each task runs on its own machine, so
+  do not create worktrees (fleet change). If the checkout is dirty or holds
+  another task's work, stop and ask: do not stash, reset, or switch branches.
 - Modernizing authorizes rebasing and updating the PR branch. It does not
   authorize merging, closing, changing the base branch, or expanding scope.
 - Never use an unqualified force push. Update a rebased branch with
@@ -73,7 +74,7 @@ not a reason to keep a PR alive.
 
 For a `MODERNIZE` disposition:
 
-1. Create a safe local branch or disposable worktree at the recorded PR head.
+1. Create a safe local branch at the recorded PR head.
 2. Rebase its commits onto the freshly fetched base branch.
 3. Resolve each conflict according to the PR's current intent and the base
    branch's newer invariants. If a conflict reveals a product or architecture

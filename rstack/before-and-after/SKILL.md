@@ -24,8 +24,10 @@ allowed-tools:
 ## Agent Behavior Rules
 
 **DO NOT:**
-- Switch branches or stash another task's changes. Use an isolated worktree for
-  any baseline server already authorized by the task.
+- Switch branches or stash another task's changes. For a baseline ("before")
+  server already authorized by the task, use a separate temporary clone, not a
+  worktree (fleet change): `git clone --depth 1 --branch main <repo-url>
+  /tmp/baseline-<task>`. Delete it when the capture is done.
 - Use `--full` unless user explicitly asks for full page / full scroll capture
 
 **DO:**

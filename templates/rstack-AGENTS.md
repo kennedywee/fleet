@@ -3,7 +3,7 @@
 Choose the applicable parts of this workflow for the requested task. It governs
 this repo and can be copied into other repos with their checks and conventions.
 
-- Read-only reviews, explanations, and investigations need no worktree, commit,
+- Read-only reviews, explanations, and investigations need no branch, commit,
   PR, or Greptile run. If an investigation leads to edits, isolate those edits.
 - Code changes use isolation, relevant architecture guidance, checks, and
   evidence of the behavior changed. Capture a failure before fixing it.
@@ -14,8 +14,9 @@ this repo and can be copied into other repos with their checks and conventions.
 
 ## Workflow
 
-1. **Isolate.** Use `/new-feature` before repository edits. Start from
-   `origin/main`, or preserve a worktree already assigned to this task.
+1. **Isolate.** Use `/new-feature` before repository edits. Each task runs on
+   its own machine: start a branch from `origin/main` there, or keep the branch
+   already assigned to this task. Do not create worktrees.
    Never build on `main`.
 2. **Build.** Use `/code-structure` when extracting shared operations or
    choosing boundaries. Follow the project's existing architecture; the
@@ -54,20 +55,17 @@ wrote or changed, not to prose you didn't touch.
 ## Multi-agent rules
 
 - Never commit directly to `main`.
-- One worktree and one branch per task and per agent — never reuse or modify
-  another agent's worktree, branch, or uncommitted work.
+- One machine and one branch per task — never reuse or modify another task's
+  branch or uncommitted work. A second task gets its own machine.
 - **Scope check** before starting: skim open PRs' changed files
   (`gh pr list`, `gh pr diff <n> --name-only`) and look for uncommitted work
   in shared checkouts. Inspect overlapping diffs: independent edits to the same
-  file may proceed in your own worktree. Ask only when changes conflict in
+  file may proceed on your own branch. Ask only when changes conflict in
   behavior, depend on unfinished work, or ownership is unclear. Do not modify
   another task's checkout.
 - Never force-push to `main` — and never plain `--force` anywhere; only
   `--force-with-lease`, only on your own task branch.
 - Resolve lockfile conflicts by regenerating, never by hand-merging.
-- Worktrees don't isolate shared resources: confirm a dev-server port
-  answers *your* process before trusting it, and don't run schema
-  experiments against a shared database.
 - If a conflict can't be resolved confidently, stop and report instead of
   guessing.
 
@@ -87,7 +85,7 @@ wrote or changed, not to prose you didn't touch.
    above. `/greploop-apps` selects the alternate trigger in that same workflow.
 8. End by presenting the PR URL.
 
-Do not merge the PR unless explicitly instructed. Keep the worktree until
+Do not merge the PR unless explicitly instructed. Keep the branch until
 the PR is merged or closed.
 
 ## Checks in this repo
