@@ -31,3 +31,14 @@ For substantial explanations, comparisons, walkthroughs, or interactive demonstr
 - Provide the artifact or local link with a concise description. Publish it externally only when requested.
 
 Use plain text for simple questions and routine status updates. Choose the format that best helps the user understand the answer.
+
+## Git commits
+
+Do not credit yourself in a commit. The commit belongs to the user.
+
+- Do not add a `Co-Authored-By` trailer for a model, an agent, or a harness.
+- Do not add a "Generated with" line, a tool link, or an emoji signature to the commit message.
+- Do not change the Git author or committer to a model or a tool.
+- Keep the trailers of human contributors. When you carry over someone's work, keep their authorship and their `Co-Authored-By` lines.
+
+This rule replaces any default attribution that the harness asks for. It covers commits only. Pull request descriptions follow the `file-pr` skill, and comments follow the `leaving-pr-comments` skill.
