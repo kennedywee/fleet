@@ -19,9 +19,14 @@ wait for the user's answers before the next round.
 Format each question like this:
 
 ```
-❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
+**Q1. <question title>**
 
-➡️ <your recommended answer>
+<question body, might be multiple paragraphs>
+
+- **A:** <choice, when the question has choices>
+- **B:** <choice>
+
+**Recommended:** <your recommended answer, with the reason in one sentence>
 ```
 
 Each round of answers reshapes the tree. Settled decisions push the frontier outward and unblock the
