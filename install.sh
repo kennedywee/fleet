@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Installs this fleet's skills, instructions and plugins for the current user. Idempotent: run it
-# after every pull. Each scope folder (universal/, claude/, …) lists in its `.targets` file the
+# Installs this fleet's skills, upstream skills, instructions and plugins for the current user.
+# Idempotent: run it after every pull. Each scope folder (universal/, codex/, …) lists in its `.targets` file the
 # agents that get its skills; every skill is linked, not copied, so a pull updates it in place.
 #
 #   ./install.sh            link everything, install missing plugins
@@ -68,6 +68,18 @@ done
 # Global instructions: one file for every agent.
 link "$fleet/AGENTS.md" "$HOME/.codex/AGENTS.md"
 link "$fleet/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+
+# Upstream skills: `source skill` per line, installed with `npx skills` and updated upstream.
+# One copy goes to ~/.agents/skills, which Codex reads; ~/.claude/skills gets a link to it.
+if command -v npx >/dev/null 2>&1; then
+  while read -r source skill; do
+    [ -z "${source:-}" ] || [[ "$source" == \#* ]] && continue
+    [ -e "$HOME/.agents/skills/$skill" ] && [ -e "$HOME/.claude/skills/$skill" ] && continue
+    npx -y skills add "$source" --skill "$skill" -g -a claude-code codex -y && echo "installed $skill"
+  done <"$fleet/skills.txt"
+else
+  echo "npx not found: upstream skills skipped" >&2
+fi
 
 # Claude Code plugins: `plugin@marketplace` per line; marketplaces.txt says where each one is.
 if command -v claude >/dev/null 2>&1; then

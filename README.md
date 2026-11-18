@@ -10,7 +10,6 @@ Each folder is a **scope**. Its `.targets` file names the agents that get its sk
 | Folder | Goes to | What |
 |---|---|---|
 | `universal/` | Claude Code, Codex | Rails, Inertia, shadcn, UI and web skills, HTML write-ups |
-| `claude/` | Claude Code | `security-audit` |
 | `codex/` | Codex | `grill-me`, `grilling` |
 | `video/` | Claude Code, `~/.agents` | HyperFrames and media skills |
 | `agents/` | `~/.agents` | `find-skills` |
@@ -23,6 +22,8 @@ Also here:
 
 - `AGENTS.md`: global instructions, linked as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
+- `skills.txt`: upstream skills we use but do not keep here (`security-audit`). `install.sh`
+  installs them for Claude Code and Codex with `npx skills`; `npx skills update -g` updates them.
 - `SOURCES.md`: where each third-party skill came from.
 
 **Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`.
@@ -83,6 +84,8 @@ Edit it here, commit, push. Each machine gets it on its next pull.
 
 - **Add a skill:** put its folder in the right scope.
 - **New scope:** a folder with a `.targets` file, e.g. `echo "claude codex" > rails/.targets`.
-- **Third-party skill:** copy it in and add a line to `SOURCES.md`.
+- **Third-party skill we change:** copy it in and add a line to `SOURCES.md`.
+- **Third-party skill we only use:** add a line to `skills.txt`, or to `plugins.txt` if it is a
+  Claude Code plugin.
 
 Keep this repo **private**: several skills are other people's work.
