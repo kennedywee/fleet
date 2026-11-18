@@ -1,3 +1,2 @@
 # Plugin marketplaces: name, then the GitHub repo or URL it is added from.
 claude-plugins-official anthropics/claude-plugins-official
-impeccable pbakaus/impeccable
