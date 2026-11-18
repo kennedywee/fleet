@@ -51,8 +51,9 @@ Some skills started as someone else's and are ours to change now:
 - Ras Mic's stack, from [michaelshimeles/skills](https://github.com/michaelshimeles/skills).
   His own skills (`new-feature`, `code-structure`, `evidence-driven-testing`) have **no license**,
   so they are here for private use only: never make this repo public with them inside. The
-  borrowed ones keep their own `LICENSE`: `unslop` and `greploop*` are MIT, `before-and-after` is
-  PolyForm Shield 1.0.0 (any use but a product that competes with its author).
+  borrowed ones are licensed upstream, with the text in their source repos: `unslop` and
+  `greploop*` are MIT, `before-and-after` is PolyForm Shield 1.0.0 (any use but a product that
+  competes with its author).
 
 `SOURCES.md` records the commit each was copied from, to compare with upstream later.
 
