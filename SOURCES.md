@@ -22,7 +22,6 @@ updated from upstream. Own skills are marked as such.
 | `ui-ux-pro-max` | universal | unknown |
 | `vercel-react-best-practices` | universal | unknown |
 | `web-design-guidelines` | universal | unknown |
-| `impeccable` | claude | unknown |
 | `security-audit` | claude | unknown |
 | `grilling` | codex | unknown |
 | `grill-me` | codex | unknown |
