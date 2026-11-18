@@ -1,0 +1,14 @@
+# Skills from other people's repos, fetched by install.sh at a pinned commit (not copied in).
+# To update one: check the upstream change, then bump its commit here.
+#
+# targets       repo                    commit                                    path in repo
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/babysit-pr
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/council
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/file-pr
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/full-send
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/full-stop
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/leaving-pr-comments
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/modernize
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/sol-loop
+claude,codex  t3dotgg/tstack          11e37a74d0a6868c121cd0910ab2b3bd9873b92a  skills/takeover
+claude,codex  michaelshimeles/skills  11b15767d7587bab11f6c4957507b5f26d1785c7  evidence-driven-testing

@@ -53,12 +53,39 @@ for scope in "$fleet"/*/; do
   done
 done
 
-# A skill removed from the fleet: its link now points at nothing.
+# Skills from other people's repos (upstream.txt), fetched at the pinned commit rather than
+# copied in: a skill only changes here when its commit is bumped.
+cache="${XDG_CACHE_HOME:-$HOME/.cache}/fleet/upstream"
+wanted=()
+while read -r targets repo commit path; do
+  [ -z "${targets:-}" ] || [[ "$targets" == \#* ]] && continue
+  checkout="$cache/$repo"
+  if [ ! -d "$checkout/.git" ]; then
+    mkdir -p "$checkout"
+    git -C "$checkout" init -q
+    git -C "$checkout" remote add origin "https://github.com/$repo.git"
+  fi
+  if [ "$(git -C "$checkout" rev-parse -q --verify HEAD 2>/dev/null)" != "$commit" ]; then
+    git -C "$checkout" fetch -q --depth 1 origin "$commit"
+    git -C "$checkout" checkout -q --detach "$commit"
+  fi
+  [ -d "$checkout/$path" ] || { echo "upstream: $repo has no $path at $commit" >&2; continue; }
+  for target in ${targets//,/ }; do
+    dest="$(target_dir "$target")/$(basename "$path")"
+    link "$checkout/$path" "$dest"
+    wanted+=("$dest")
+  done
+done <"$fleet/upstream.txt"
+
+# A skill removed from the fleet or from upstream.txt loses its link.
 for target in claude codex agents; do
   dir="$(target_dir "$target")"
   [ -d "$dir" ] || continue
   for entry in "$dir"/*; do
-    if [ -L "$entry" ] && [[ "$(readlink "$entry")" == "$fleet"/* ]] && [ ! -e "$entry" ]; then
+    [ -L "$entry" ] || continue
+    to="$(readlink "$entry")"
+    if [[ "$to" == "$fleet"/* && ! -e "$entry" ]] ||
+      [[ "$to" == "$cache"/* && ! " ${wanted[*]} " == *" $entry "* ]]; then
       rm "$entry"
       echo "removed $entry"
     fi

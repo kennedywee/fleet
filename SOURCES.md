@@ -31,3 +31,10 @@ updated from upstream. Own skills are marked as such.
 | `hyperframes-registry` | video | unknown |
 | `media-use` | video | unknown |
 | `find-skills` | agents | unknown |
+
+## Upstream (not copied, see upstream.txt)
+
+| Skill | Source | License |
+|---|---|---|
+| `babysit-pr`, `council`, `file-pr`, `full-send`, `full-stop`, `leaving-pr-comments`, `modernize`, `sol-loop`, `takeover` | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) (Theo Browne) | MIT |
+| `evidence-driven-testing` | [michaelshimeles/skills](https://github.com/michaelshimeles/skills) (Ras Mic) | none stated |
