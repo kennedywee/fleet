@@ -3,22 +3,22 @@
 Where each skill came from. Fill in an unknown source when you find it, so the skill can be
 updated from upstream. Own skills are marked as such.
 
-| Skill | Scope | Source |
-|---|---|---|
-| `ce-dhh-rails-style` | universal | unknown |
-| `html-communication` | universal | own |
-| `html-upload` | universal | own: github.com/kennedywee/html-upload |
-| `grilling` | codex | unknown |
-| `grill-me` | codex | unknown |
-| `find-skills` | agents | unknown |
+| Skill | Source |
+|---|---|
+| `ce-dhh-rails-style` | unknown |
+| `html-communication` | own |
+| `html-upload` | own: github.com/kennedywee/html-upload |
+| `grilling` | unknown |
+| `grill-me` | unknown |
+| `find-skills` | unknown |
 
 ## Copied from other people's repos
 
-| Skill | Scope | Source | Copied at | License |
-|---|---|---|---|---|
-| `babysit-pr`, `council`, `file-pr`, `full-send`, `full-stop`, `leaving-pr-comments`, `modernize`, `sol-loop`, `takeover` | pr | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) (Theo Browne) | `11e37a7` | MIT, text in the upstream repo |
-| `new-feature`, `code-structure`, `evidence-driven-testing` | rstack | [michaelshimeles/skills](https://github.com/michaelshimeles/skills) (Ras Mic) | `11b1576` | none: private use only |
-| `greploop`, `greploop-apps` | rstack | Greptile, via michaelshimeles/skills | `11b1576` | MIT, `LICENSE` in the folder |
-| `unslop` | rstack | Lauren Tan (Cursor pstack), via michaelshimeles/skills | `11b1576` | MIT, `LICENSE` in the folder |
-| `before-and-after` | rstack | James Clements (Vercel Labs), via michaelshimeles/skills | `11b1576` | PolyForm Shield 1.0.0, `LICENSE` in the folder; fleet change: no default upload host |
-| `templates/rstack-AGENTS.md` | (template) | michaelshimeles/skills | `11b1576` | none: private use only |
+| Skill | Source | Copied at | License |
+|---|---|---|---|
+| `babysit-pr`, `council`, `file-pr`, `full-send`, `full-stop`, `leaving-pr-comments`, `modernize`, `sol-loop`, `takeover` | [t3dotgg/tstack](https://github.com/t3dotgg/tstack) (Theo Browne) | `11e37a7` | MIT, text in the upstream repo |
+| `new-feature`, `code-structure`, `evidence-driven-testing` | [michaelshimeles/skills](https://github.com/michaelshimeles/skills) (Ras Mic) | `11b1576` | none: private use only |
+| `greploop`, `greploop-apps` | Greptile, via michaelshimeles/skills | `11b1576` | MIT, `LICENSE` in the folder |
+| `unslop` | Lauren Tan (Cursor pstack), via michaelshimeles/skills | `11b1576` | MIT, `LICENSE` in the folder |
+| `before-and-after` | James Clements (Vercel Labs), via michaelshimeles/skills | `11b1576` | PolyForm Shield 1.0.0, `LICENSE` in the folder; fleet change: no default upload host |
+| `templates/rstack-AGENTS.md` | michaelshimeles/skills | `11b1576` | none: private use only |
