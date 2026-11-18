@@ -5,7 +5,7 @@ updated from upstream. Own skills are marked as such.
 
 | Skill | Source |
 |---|---|
-| `ce-dhh-rails-style` | unknown |
+| `dhh-rails` | unknown |
 | `html-communication` | own |
 | `html-upload` | own: github.com/kennedywee/html-upload |
 | `grilling` | unknown |

@@ -1,5 +1,5 @@
 ---
-name: ce-dhh-rails-style
+name: dhh-rails
 description: Apply DHH-inspired Ruby and Rails backend conventions when implementing or reviewing models, controllers, routes, jobs, and persistence. Use for DHH or 37signals style requests. Preserve the existing frontend, authorization, dependencies, and test framework; frontend-only work is outside this skill.
 ---
 

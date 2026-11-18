@@ -15,7 +15,7 @@ Where the skills come from:
   `leaving-pr-comments`, `modernize`, `sol-loop`, `takeover`.
 - Ras Mic's stack: `new-feature`, `code-structure`, `evidence-driven-testing`,
   `before-and-after`, `unslop`, `greploop`, `greploop-apps`.
-- Others: `ce-dhh-rails-style`, `grill-me`, `grilling`, `find-skills`.
+- Others: `dhh-rails`, `grill-me`, `grilling`, `find-skills`.
 
 Also here:
 
