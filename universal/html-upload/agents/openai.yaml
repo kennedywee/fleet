@@ -1,0 +1,3 @@
+interface:
+  display_name: "HTML Upload"
+  short_description: "Publish HTML artifacts and return an unlisted URL"

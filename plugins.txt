@@ -1,0 +1,4 @@
+# Claude Code plugins, one `plugin@marketplace` per line. install.sh installs the missing ones.
+superpowers@claude-plugins-official
+frontend-design@claude-plugins-official
+# clangd-lsp@claude-plugins-official  (C/C++ only; needs clangd on the machine)
