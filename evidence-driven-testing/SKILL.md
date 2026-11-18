@@ -197,10 +197,10 @@ Fill in the Caveats section of `report.md`. Never leave the placeholder.
 - `report.md` is the report: what was tested, the environment and exact commit, pass or fail per
   test, and caveats. Extend it; do not rewrite it from scratch.
 - Post the video and the summary as a PR comment. If it is your PR, embed them in the PR
-  description. `gh pr comment` cannot attach a local video. Upload `evidence.mp4` through the PR's
-  comment box in an authenticated browser, or upload it to a host and link it (for example with the
-  `before-and-after` skill's upload adapters). Reopen the comment and confirm that the video plays
-  before you claim it is posted.
+  description. Attach the video with `gh`: `gh pr comment <number> --body-file summary.md --attach
+  .artifacts/<task-name>/evidence.mp4`, or the same `--attach` flag on `gh pr edit`. Then read the
+  comment or description back, and confirm that it holds the uploaded asset before you claim it is
+  posted.
 - If the task includes a tracker issue and posting there is authorized, attach the same video with a
   one-line result.
 - Send the report and the recording to the requester.
@@ -250,9 +250,9 @@ committed. Keep the capture script beside the captures, so the run is repeatable
 
 ### Screenshots
 
-The `before-and-after` CLI (`@vercel/before-and-after`) captures URLs or elements, and its pairs
-feed PR embeds directly. In containers and VMs where Chrome fails with "No usable sandbox", set
-`AGENT_BROWSER_ARGS="--no-sandbox"`.
+The `before-and-after` CLI (`@vercel/before-and-after`) captures URLs or elements. The
+`before-and-after` skill attaches the pairs to the PR. In containers and VMs where Chrome fails with
+"No usable sandbox", set `AGENT_BROWSER_ARGS="--no-sandbox"`.
 
 ### Video and multi-step flows
 
@@ -324,8 +324,7 @@ Number the captures in test order, with the assertion in the name: `01-precondit
   -ltnp "sport = :<port>"` to find the listener's PID, then `ps -p <pid> -o args=` to confirm that
   it is yours.
 - Evidence adds to the repo's checks (typecheck, build, tests). It never replaces them.
-- Hand before and after media pairs to a before/after tool for the PR embed, for example
-  `before-and-after before.png after.png --markdown`.
+- Use the `before-and-after` skill to put before and after image pairs in the PR.
 
 ## Requirements
 

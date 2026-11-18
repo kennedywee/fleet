@@ -1,12 +1,12 @@
 # fleet
 
-Kennedy's agent setup for every machine: skills, global instructions and Claude Code plugins.
-One repo, pulled on each machine; `install.sh` links it into place.
+Kennedy's agent setup for every machine: skills, global instructions and Claude Code plugins. One
+repo, pulled on each machine; `install.sh` links it into place.
 
 ## Layout
 
-Every skill is a folder at the top level, holding its `SKILL.md`. `install.sh` links each one
-into both Claude Code (`~/.claude/skills`) and Codex (`~/.codex/skills`).
+Every skill is a folder at the top level, holding its `SKILL.md`. `install.sh` links each one into
+both Claude Code (`~/.claude/skills`) and Codex (`~/.codex/skills`).
 
 The skills:
 
@@ -25,8 +25,8 @@ Also here:
 - `skills.txt`: upstream skills we use but do not keep here (`security-audit`). `install.sh`
   installs them for Claude Code and Codex with `npx skills`; `npx skills update -g` updates them.
 
-**Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`.
-They control the Omarchy desktop and come with Omarchy and Superwhisper themselves.
+**Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`. They
+control the Omarchy desktop and come with Omarchy and Superwhisper themselves.
 
 ## Install on a machine
 
@@ -39,24 +39,24 @@ Then `git -C ~/fleet pull && ~/fleet/install.sh` to update. t3boat machines can 
 wake.
 
 `install.sh` links each skill folder, so a pull updates skills in place. It only replaces links it
-made: a real skill folder already on the machine is kept, unless you pass `--force`, which moves
-it aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
+made: a real skill folder already on the machine is kept, unless you pass `--force`, which moves it
+aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
 
 ## How the skills work
 
-- **One machine per task, no worktrees.** Each feature runs on its own t3boat VM, so the VM is
-  the isolation. `new-feature` makes a branch in the machine's checkout and stops if the
-  checkout holds another task's work. `modernize`, `greploop` and `before-and-after` follow
-  the same rule.
-- **Before screenshots first.** `new-feature` captures the "before" while the branch still
-  matches `main`. `before-and-after` reuses it, or uses a deployed baseline, and only as a last
-  resort runs `main` from a temporary clone, one server at a time, with its own database when
-  migrations differ. Two copies of the app never run at once on one machine.
-- **No upload by default.** `before-and-after` uploads only to a host you name.
-- **Merging.** `full-send` may merge the PR, and only when you say "full send". `full-stop`
-  does the same work and never merges.
-- **Other models.** `council` and `sol-loop` ask other providers' models for review, through
-  T3 Code's `delegate_task`.
+- **One machine per task, no worktrees.** Each feature runs on its own t3boat VM, so the VM is the
+  isolation. `new-feature` makes a branch in the machine's checkout and stops if the checkout holds
+  another task's work. `modernize`, `greploop` and `before-and-after` follow the same rule.
+- **Before screenshots first.** `new-feature` captures the "before" while the branch still matches
+  `main`. `before-and-after` reuses it, or uses a deployed baseline, and only as a last resort runs
+  `main` from a temporary clone, one server at a time, with its own database when migrations differ.
+  Two copies of the app never run at once on one machine.
+- **Evidence goes to GitHub.** Screenshots and videos are attached to the PR with `gh --attach`, and
+  only when the task asks for them. No other host is used.
+- **Merging.** `full-send` may merge the PR, and only when you say "full send". `full-stop` does the
+  same work and never merges.
+- **Other models.** `council` and `sol-loop` ask other providers' models for review, through T3
+  Code's `delegate_task`.
 
 Requirements: `greploop` and `greploop-apps` need Greptile installed on the repo.
 `evidence-driven-testing` needs `ffmpeg`/`ffprobe`, and Node 20+ for its Playwright helper.
@@ -66,8 +66,8 @@ Requirements: `greploop` and `greploop-apps` need Greptile installed on the repo
 Edit it here, commit, push. Each machine gets it on its next pull.
 
 - **Add a skill:** put its folder at the top level, and write it to the conventions below.
-- **Use an upstream skill as is:** add a line to `skills.txt`, or to `plugins.txt` if it is a
-  Claude Code plugin.
+- **Use an upstream skill as is:** add a line to `skills.txt`, or to `plugins.txt` if it is a Claude
+  Code plugin.
 
 ## Skill conventions
 
@@ -79,8 +79,8 @@ rewritten to these rules when it comes in.
 - `name` and `description`, each on one line. Add another field only when it changes behavior
   (`disable-model-invocation`, `allowed-tools`). Leave out author, version and license.
 - The description has up to three sentences. The first says what the skill does and starts with a
-  verb. The second starts with "Use when" and gives the triggers. An optional third starts with
-  "Not for". Put the user's trigger phrases in double quotes: `Use when the user says "full send".`
+  verb. The second starts with "Use when" and gives the triggers. An optional third starts with "Not
+  for". Put the user's trigger phrases in double quotes: `Use when the user says "full send".`
 
 **Body**
 

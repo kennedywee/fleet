@@ -6,13 +6,9 @@ allowed-tools:
   - Bash(before-and-after *)
   - Bash(which before-and-after)
   - Bash(npm install -g @vercel/before-and-after)
-  - Bash(*/upload-and-copy.sh *)
   - Bash(curl -s -o /dev/null -w *)
   - Bash(gh pr view *)
   - Bash(gh pr edit *)
-  - Bash(vercel inspect *)
-  - Bash(vercel whoami)
-  - Bash(which vercel)
   - Bash(which gh)
 ---
 
@@ -30,7 +26,8 @@ npm package named `before-and-after` is a different package.
 - Never run the baseline and the changed app at the same time on this machine. They share its ports
   and its database. See "Get the before state".
 - Use `--full` only when the user explicitly asks for a full-page or full-scroll capture.
-- Use `--markdown` when the user wants PR integration or Markdown output.
+- Never use the CLI's `--markdown` or `--upload-url` flags. They upload the images to an outside
+  host. Attach the images with `gh`. See "Embed in the PR".
 - Use `--mobile` or `--tablet` when the user mentions a phone, mobile, tablet, or responsive layout.
 - Reuse the before captures, baseline URLs, and revision information that the task already has.
   Confirm that they show the relevant behavior and match the after capture's viewport and starting
@@ -66,12 +63,9 @@ If none of these works, ask the user for the before images or a baseline URL.
 2. For remote URLs, check access when needed. A 401 or 403 indicates protection. An existing image
    pair needs no URL and no access check.
 3. Capture the missing images with `before-and-after "<before-url>" "<after-url>"`.
-4. When the task calls for uploaded evidence or PR Markdown, run `before-and-after before.png
-   after.png --markdown` once. For a local capture request, deliver the files without uploading
-   them.
-5. Append the Markdown to the PR when PR integration is part of the task.
+4. For a local capture request, deliver the files without uploading them.
+5. When the task asks for PR screenshots or uploaded evidence, follow "Embed in the PR".
 
-Resolve bundled script paths relative to this skill's folder, not the project's working directory.
 Reuse earlier evidence; do not capture it again.
 
 ## Command reference
@@ -91,9 +85,6 @@ before-and-after url1 url2 --mobile    # 375x812
 before-and-after url1 url2 --tablet    # 768x1024
 before-and-after url1 url2 --full      # full scroll
 
-# From existing images
-before-and-after before.png after.png --markdown
-
 # Through npx (use the full package name)
 npx @vercel/before-and-after url1 url2
 ```
@@ -106,42 +97,45 @@ npx @vercel/before-and-after url1 url2
 | `-f, --full` | Full scrollable page |
 | `-s, --selector` | CSS selector to capture |
 | `-o, --output` | Output directory (default: ~/Downloads) |
-| `--markdown` | Upload the images and print a Markdown table |
-| `--upload-url <url>` | Custom upload endpoint (no default: see "Upload images") |
 
-## Upload images
+## Embed in the PR
 
-Nothing uploads by default, because screenshots of a private app must not become public by accident.
-Uploading needs a host that the user chose on purpose. Ask the user before you upload.
+Attach the images with `gh`. It uploads them to GitHub, so no other host is needed. Do this only
+when the task asks for PR screenshots or uploaded evidence.
 
-```bash
-# 0x0.st: public, no signup. Only when the user agrees that the images may be public.
-IMAGE_ADAPTER=0x0st ./scripts/upload-and-copy.sh before.png after.png --markdown
-```
+1. Read the existing PR body:
 
-## Vercel deployment protection
+   ```bash
+   gh pr view <number> --json body --jq .body > /tmp/pr-body.md
+   ```
 
-If a `.vercel.app` URL returns 401 or 403:
+2. Append the comparison table to that file. Reference the local image paths:
 
-1. Check for the Vercel CLI: `which vercel && vercel whoami`.
-2. If it is available, run `vercel inspect <url>` to get a bypass token.
-3. If it is not, ask the user to provide a bypass token, take manual screenshots, or disable the
-   protection.
+   ```markdown
+   | Before | After |
+   |:------:|:-----:|
+   | ![Before](./before.png) | ![After](./after.png) |
+   ```
 
-## Add the comparison to a PR
+3. Update the PR and attach both images with the same paths. `gh` rewrites each reference to the
+   uploaded asset:
 
-```bash
-# Check for the gh CLI
-which gh
+   ```bash
+   gh pr edit <number> --body-file /tmp/pr-body.md \
+     --attach './before.png#Before' --attach './after.png#After'
+   ```
 
-# Get the current PR
-gh pr view --json number,body
+4. Run `gh pr view <number> --json body --jq .body` and confirm that both references now point at
+   uploaded assets, not local paths.
 
-# Write the existing body plus the comparison to a temporary file, then:
-gh pr edit <number> --body-file /path/to/pr-body.md
-```
+For a new PR, pass the same `--attach` flags to `gh pr create`. For a comment, pass them to `gh pr
+comment`.
 
-If there is no `gh` CLI, print the Markdown and tell the user to paste it manually.
+Never attach a screenshot that shows secrets, tokens, or customer data. If the page under test needs
+them, ask the user first.
+
+If `gh` is missing or has no `--attach` flag, give the user the image paths and the Markdown table,
+and tell them to add the images by hand.
 
 ## Errors
 
@@ -149,5 +143,5 @@ If there is no `gh` CLI, print the Markdown and tell the user to paste it manual
 | --- | --- |
 | `command not found` | `npm install -g @vercel/before-and-after` |
 | `could not determine executable` | Use `npx @vercel/before-and-after` (the full name) |
-| 401 or 403 on `.vercel.app` | See "Vercel deployment protection" |
+| 401 or 403 on a remote URL | The page is protected. Ask the user for access or for the before image |
 | Element not found | Verify that the selector exists on the page |

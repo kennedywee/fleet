@@ -72,7 +72,7 @@ infrastructure flakes.
 
 When you dismiss a false positive, or feedback that is not worth addressing, reply with a written
 reason and resolve the comment. Use the `leaving-pr-comments` skill for every comment that you post
-for the user. Screenshots and videos help too, when you have a way to upload them.
+for the user. Screenshots and videos help too. Attach them with `gh pr comment --attach`.
 
 ## Keep the PR small
 
