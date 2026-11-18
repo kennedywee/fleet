@@ -29,12 +29,11 @@ For published HTML, render diagrams into inline SVG or semantic HTML/CSS. Mermai
 
 ## Design
 
-Before creating or substantially revising the HTML, load and apply both installed design skills:
+Before creating or substantially revising the HTML, load and apply the installed design skill:
 
-- `impeccable` (listed as `impeccable:impeccable` in some environments): use its **Read** mode for documents, and the appropriate surface mode for UI mocks. Follow its relevant design and craft guidance for hierarchy, typography, spacing, and visual polish.
 - `ui-ux-pro-max`: use its search workflow to select a coherent visual direction for a new document, or a targeted query for a revision. Apply relevant typography, palette, responsive layout, accessibility, and chart guidance. Inspect search results for suitability before using them.
 
-Resolve these skills from the active agent's skill catalog or skill directory; resolve scripts and references relative to the loaded skill. In Claude, use `${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills`. Do not hardcode versioned plugin-cache paths. If a dependency is missing, report it and continue with the available guidance without claiming it was applied.
+Resolve this skill from the active agent's skill catalog or skill directory; resolve scripts and references relative to it. In Claude, use `${CLAUDE_CONFIG_DIR:-$HOME/.claude}/skills`. Do not hardcode versioned plugin-cache paths. If a dependency is missing, report it and continue with the available guidance without claiming it was applied.
 
 Keep the result appropriate to the content: a readable editorial document with deliberate typography, consistent spacing, restrained color, and useful diagrams or tables. Preserve the user's requested aesthetic and any established design. Apply design workflows to the standalone artifact; keep any supporting design files beside the artifact rather than modifying unrelated product files.
 
