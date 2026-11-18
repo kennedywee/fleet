@@ -47,8 +47,8 @@ it aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
 
 Some skills started as someone else's and are ours to change now:
 
-- `pr/`: Theo's PR skills from [t3dotgg/tstack](https://github.com/t3dotgg/tstack), MIT. Keep
-  `licenses/tstack-MIT.txt` with them.
+- `pr/`: Theo's PR skills from [t3dotgg/tstack](https://github.com/t3dotgg/tstack), MIT. The
+  license text is in that repo, not here.
 - `rstack/`: Ras Mic's stack, from [michaelshimeles/skills](https://github.com/michaelshimeles/skills).
   His own skills (`new-feature`, `code-structure`, `evidence-driven-testing`) have **no license**,
   so they are here for private use only: never make this repo public with them inside. The
