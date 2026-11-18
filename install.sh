@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # Installs this fleet's skills, upstream skills, instructions and plugins for the current user.
-# Idempotent: run it after every pull. Each top-level folder with a SKILL.md is a skill. It goes to
-# Claude Code and Codex, unless targets.txt names other agents for it. Every skill is linked, not
-# copied, so a pull updates it in place.
+# Idempotent: run it after every pull. Each top-level folder with a SKILL.md is a skill, linked
+# into both Claude Code and Codex. Links, not copies, so a pull updates every skill in place.
 #
 #   ./install.sh            link everything, install missing plugins
 #   ./install.sh --force    also replace skill folders that are real folders, not our links
@@ -41,20 +40,11 @@ link() {
   echo "linked $dest"
 }
 
-# The agents that get a skill: its line in targets.txt, else Claude Code and Codex.
-targets_for() {
-  local name targets
-  while read -r name targets; do
-    [ "$name" = "$1" ] && { echo "$targets"; return; }
-  done < <(grep -v '^[[:space:]]*\(#\|$\)' "$fleet/targets.txt")
-  echo "claude codex"
-}
-
-# Skills: every top-level folder with a SKILL.md.
+# Skills: every top-level folder with a SKILL.md, for Claude Code and Codex.
 for skill in "$fleet"/*/; do
   skill="${skill%/}"
   [ -f "$skill/SKILL.md" ] || continue
-  for target in $(targets_for "$(basename "$skill")"); do
+  for target in claude codex; do
     link "$skill" "$(target_dir "$target")/$(basename "$skill")"
   done
 done

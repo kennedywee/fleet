@@ -6,10 +6,7 @@ One repo, pulled on each machine; `install.sh` links it into place.
 ## Layout
 
 Every skill is a folder at the top level, holding its `SKILL.md`. `install.sh` links each one
-into Claude Code (`~/.claude/skills`) and Codex (`~/.codex/skills`).
-
-`targets.txt` lists the skills that go elsewhere. Today these are `grill-me` and `grilling`
-(Codex only) and `find-skills` (`~/.agents/skills` only).
+into both Claude Code (`~/.claude/skills`) and Codex (`~/.codex/skills`).
 
 Where the skills come from:
 
@@ -23,7 +20,6 @@ Where the skills come from:
 Also here:
 
 - `AGENTS.md`: global instructions, linked as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
-- `targets.txt`: skills that do not go to both Claude Code and Codex.
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
 - `skills.txt`: upstream skills we use but do not keep here (`security-audit`). `install.sh`
   installs them for Claude Code and Codex with `npx skills`; `npx skills update -g` updates them.
@@ -85,8 +81,7 @@ models for review, through T3 Code's `delegate_task`.
 
 Edit it here, commit, push. Each machine gets it on its next pull.
 
-- **Add a skill:** put its folder at the top level. If it should not go to both Claude Code and
-  Codex, add a line to `targets.txt`.
+- **Add a skill:** put its folder at the top level.
 - **Third-party skill we change:** copy it in and add a line to `SOURCES.md`.
 - **Third-party skill we only use:** add a line to `skills.txt`, or to `plugins.txt` if it is a
   Claude Code plugin.

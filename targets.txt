@@ -1,5 +1,0 @@
-# Skills that do not go to the default agents (Claude Code and Codex). One per line: the skill,
-# then its agents. claude is ~/.claude/skills, codex is ~/.codex/skills, agents is ~/.agents/skills.
-find-skills agents
-grill-me codex
-grilling codex
