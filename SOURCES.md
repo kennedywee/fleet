@@ -21,4 +21,3 @@ updated from upstream. Own skills are marked as such.
 | `greploop`, `greploop-apps` | Greptile, via michaelshimeles/skills | `11b1576` | MIT, `LICENSE` in the folder |
 | `unslop` | Lauren Tan (Cursor pstack), via michaelshimeles/skills | `11b1576` | MIT, `LICENSE` in the folder |
 | `before-and-after` | James Clements (Vercel Labs), via michaelshimeles/skills | `11b1576` | PolyForm Shield 1.0.0, `LICENSE` in the folder; fleet change: no default upload host |
-| `templates/rstack-AGENTS.md` | michaelshimeles/skills | `11b1576` | none: private use only |

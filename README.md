@@ -53,8 +53,6 @@ Some skills started as someone else's and are ours to change now:
   so they are here for private use only: never make this repo public with them inside. The
   borrowed ones keep their own `LICENSE`: `unslop` and `greploop*` are MIT, `before-and-after` is
   PolyForm Shield 1.0.0 (any use but a product that competes with its author).
-- `templates/rstack-AGENTS.md`: his workflow file, meant for a repo's root (not global). Copy it
-  into a repo and replace its "Checks in this repo" section with that repo's checks.
 
 `SOURCES.md` records the commit each was copied from, to compare with upstream later.
 
@@ -62,8 +60,8 @@ Our changes to copied skills are marked "fleet change":
 
 - **One machine per task, no worktrees.** Each feature runs on its own t3boat VM, so the VM is
   the isolation. `new-feature` makes a branch in the machine's checkout and stops if the
-  checkout holds another task's work. `modernize`, `greploop`, `before-and-after` and the
-  `rstack-AGENTS.md` template follow the same rule.
+  checkout holds another task's work. `modernize`, `greploop` and `before-and-after` follow
+  the same rule.
 - **Before screenshots first.** `new-feature` captures the "before" while the branch still
   matches `main`. `before-and-after` reuses it, or uses a deployed baseline, and only as a last
   resort runs `main` from a temporary clone, one server at a time, with its own database when
