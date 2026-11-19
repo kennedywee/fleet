@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fleet Sync"
+  short_description: "Update this machine from the fleet repo"
+  default_prompt: "Use $fleet-sync to pull the fleet and install it on this machine."

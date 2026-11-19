@@ -18,6 +18,7 @@ The skills:
 - **Rails:** `dhh-rails`.
 - **Writing:** `unslop`, `html-communication`, `html-upload`.
 - **Planning:** `grill-me`, `grilling`.
+- **This repo:** `fleet-sync`.
 
 Also here:
 
@@ -36,8 +37,9 @@ git clone https://github.com/kennedywee/fleet ~/fleet
 ~/fleet/install.sh
 ```
 
-Then `git -C ~/fleet pull && ~/fleet/install.sh` to update. t3boat machines can do this on every
-wake.
+To update a machine, tell an agent on it "fleet sync". The `fleet-sync` skill pulls the checkout and
+runs `install.sh`. Nothing runs on a schedule: a machine changes only when you ask. By hand, the
+same update is `git -C ~/fleet pull && ~/fleet/install.sh`.
 
 `install.sh` links each skill folder, so a pull updates skills in place. It only replaces links it
 made: a real skill folder already on the machine is kept, unless you pass `--force`, which moves it
