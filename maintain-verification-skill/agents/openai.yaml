@@ -1,0 +1,4 @@
+interface:
+  display_name: "Maintain Verification Skill"
+  short_description: "Correct a verify skill that drifted from the app"
+  default_prompt: "Use $maintain-verification-skill to check this repo's verify skill against the app and correct what no longer matches."

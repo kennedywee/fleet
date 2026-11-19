@@ -14,6 +14,10 @@ Choose evidence in proportion to the change:
 - **CLI or API changes:** output pairs.
 - **Documentation-only edits:** content checks and verification of runnable examples. No recording.
 
+If the project has a `verify-<app>` skill, follow it to launch and drive the app, and to learn what
+proves each feature. This skill then covers how to record and post that proof. If the project has
+none and you need one, use the `create-verification-skill` skill.
+
 Reuse suitable evidence that the task already captured. Publish only to destinations that the
 requested work includes.
 

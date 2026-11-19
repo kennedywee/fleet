@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create Verification Skill"
+  short_description: "Generate a skill that proves this app works"
+  default_prompt: "Use $create-verification-skill to write a verify skill for this repo, and run it once to prove it."

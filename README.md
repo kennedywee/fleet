@@ -12,7 +12,8 @@ The skills:
 
 - **Pull requests:** `file-pr`, `full-stop`, `full-send`, `babysit-pr`, `takeover`,
   `leaving-pr-comments`, `council`, `sol-loop`, `modernize`.
-- **Features and testing:** `new-feature`, `evidence-driven-testing`, `before-and-after`.
+- **Features and testing:** `new-feature`, `evidence-driven-testing`, `before-and-after`,
+  `create-verification-skill`, `maintain-verification-skill`.
 - **Review feedback:** `greploop`, `greploop-apps`.
 - **Rails:** `dhh-rails`.
 - **Writing:** `unslop`, `html-communication`, `html-upload`.
@@ -53,6 +54,10 @@ aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
   Two copies of the app never run at once on one machine.
 - **Evidence goes to GitHub.** Screenshots and videos are attached to the PR with `gh --attach`, and
   only when the task asks for them. No other host is used.
+- **Each project proves itself.** `create-verification-skill` writes a `verify-<app>` skill into a
+  project: how to launch the app, how to drive it, and what proves each feature.
+  `maintain-verification-skill` keeps it correct. `evidence-driven-testing` records and posts the
+  proof.
 - **Merging.** `full-send` may merge the PR, and only when you say "full send". `full-stop` does the
   same work and never merges.
 - **Other models.** `council` and `sol-loop` ask other providers' models for review, through T3
