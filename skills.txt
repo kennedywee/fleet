@@ -2,3 +2,4 @@
 # the source repo, then the skill name. install.sh adds the missing ones for Claude Code and Codex.
 # Update them with `npx skills update -g`.
 https://github.com/cloudflare/security-audit-skill security-audit
+https://github.com/vercel-labs/ui ui-sdk
