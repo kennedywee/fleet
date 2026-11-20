@@ -102,14 +102,24 @@ fi
 
 # Remote MCP servers: `name url` per line, added at user scope. A name the agent already has is
 # kept, so a laptop's local server (Paper Desktop's `paper`) is not replaced by the remote one.
+mcp_failed=0
 while read -r name url; do
   [ -z "${name:-}" ] || [[ "$name" == \#* ]] && continue
   if command -v claude >/dev/null 2>&1 && ! claude mcp get "$name" </dev/null >/dev/null 2>&1; then
-    claude mcp add --scope user --transport http "$name" "$url" </dev/null >/dev/null &&
+    if claude mcp add --scope user --transport http "$name" "$url" </dev/null >/dev/null; then
       echo "added MCP $name to Claude Code: sign in with /mcp"
+    else
+      echo "failed to add MCP $name to Claude Code" >&2
+      mcp_failed=1
+    fi
   fi
   if command -v codex >/dev/null 2>&1 && ! codex mcp get "$name" </dev/null >/dev/null 2>&1; then
-    codex mcp add "$name" --url "$url" </dev/null >/dev/null &&
+    if codex mcp add "$name" --url "$url" </dev/null >/dev/null; then
       echo "added MCP $name to Codex: sign in with codex mcp login $name"
+    else
+      echo "failed to add MCP $name to Codex" >&2
+      mcp_failed=1
+    fi
   fi
 done <"$fleet/mcp.txt"
+exit "$mcp_failed"
