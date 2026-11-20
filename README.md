@@ -25,7 +25,7 @@ Also here:
 
 - `AGENTS.md`: global instructions, linked as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
-- `skills.txt`: upstream skills we use but do not keep here (`security-audit`, `ui-sdk`).
+- `skills.txt`: upstream skills we use but do not keep here (`security-audit`, `ai-sdk`, `ui-sdk`).
   `install.sh` installs them for Claude Code and Codex with `npx skills`; `npx skills update -g`
   updates them.
 
