@@ -25,8 +25,9 @@ Also here:
 
 - `AGENTS.md`: global instructions, linked as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
-- `skills.txt`: upstream skills we use but do not keep here (`security-audit`). `install.sh`
-  installs them for Claude Code and Codex with `npx skills`; `npx skills update -g` updates them.
+- `skills.txt`: upstream skills we use but do not keep here (`security-audit`, `ui-sdk`).
+  `install.sh` installs them for Claude Code and Codex with `npx skills`; `npx skills update -g`
+  updates them.
 
 **Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`. They
 control the Omarchy desktop and come with Omarchy and Superwhisper themselves.
