@@ -40,7 +40,11 @@ the other, or the user decides the order.
 2. **Drop the busy ones.** Call `t3_thread_list` for each machine with `allProjects` and the active
    statuses. A machine with an active thread is busy.
 3. **Check the project.** Call `t3_project_list` for each machine. Match the project by its
-   repository, not by its title.
+   repository, not by its title. Keep the path of every project on the machine, not only this
+   one. The preflight checks them all.
+
+A machine with no active thread can still hold a task. A thread that ended with its PR open keeps
+the machine, in any project. Only the preflight can tell.
 
 If a machine the user named is not linked, call `t3_environment_link` with a hint from the user's
 words.
@@ -51,27 +55,40 @@ Run the preflight on a machine right before you give it a task. Use one `delegat
 `target.environmentId`, `role: "general"`, and `mode: "async"`. Send this brief:
 
 ```
-Preflight only. Do not edit the project, switch branches, stash, or reset.
+Preflight only. Do not edit a project, switch branches, stash, or reset.
 1. Use the fleet-sync skill. If this machine has no fleet checkout, say so and continue.
-2. In <project path>: git fetch origin; git status --short --branch; git log --oneline -3.
-3. If the branch is not main: gh pr list --head <branch> --state all --json number,state,url.
-4. gh auth status.
+2. For each of full-stop, full-send, new-feature, evidence-driven-testing, before-and-after,
+   sol-loop, file-pr, babysit-pr: readlink -f <skills folder>/<name>. Each must be a folder
+   inside the fleet checkout.
+3. In each of <project paths>: git fetch origin; git status --short --branch; git rev-parse HEAD.
+4. Where the branch is not main: gh pr list --head <branch> --state all
+   --json number,state,url,headRefOid.
+5. gh auth status.
 Reply:
 FLEET: current at <sha> | updated <old>..<new> | missing | failed: <reason>
-CHECKOUT: <branch>, clean | dirty, PR <number> <state> | no PR
+SKILLS: all from the fleet | not from the fleet: <names>
+CHECKOUT <path>: <branch>, clean | dirty, HEAD <sha>, PR <number> <state> head <sha> | no PR
 GH: ok | failed: <reason>
 ```
 
+Give one `CHECKOUT` line per project. `<skills folder>` is the one for the harness that the thread
+will use: `~/.claude/skills` or `~/.codex/skills`.
+
 Read the reply against these cases:
 
-- **Ready:** the fleet is current or updated, the checkout is a clean `main`, and `gh` works.
-- **Left over from a merged or closed PR:** the checkout is clean, and its branch belongs to a PR
-  that is merged or closed. Send a second task that runs the clean-up from the `new-feature` skill.
-  Then the machine is ready.
-- **Holds open work:** the checkout is dirty, or its branch has an open PR or no PR. The machine
-  belongs to that task. Do not use it.
+- **Ready:** the fleet is current or updated, every skill comes from the fleet, every checkout is a
+  clean `main`, and `gh` works.
+- **Left over from a merged or closed PR:** a checkout is clean, its branch belongs to a PR that is
+  merged or closed, and its `HEAD` is that PR's head. Send a second task that runs the clean-up
+  from the `new-feature` skill in that checkout. Then run the preflight again.
+- **Holds open work:** a checkout in any project is dirty, or its branch has an open PR or no PR, or
+  its `HEAD` is not the PR's head. Commits that the PR does not hold exist only on this machine, and
+  the clean-up would delete their branch. The machine belongs to that task. Do not use it, and
+  report the commits.
 - **No fleet, or the sync failed:** do not use it. An agent without the fleet does not know "full
   stop", and does the work its own way.
+- **A skill is not from the fleet:** a real folder sits where the link belongs, so the thread would
+  load an old copy. Do not use the machine. Report the names. Never pass `--force` to `install.sh`.
 - **No project:** clone it with `t3_project_clone`, register it with `t3_project_create`, and run
   the preflight again.
 - **`gh` fails:** do not use it. The thread could not push or open a PR.
@@ -125,9 +142,9 @@ Never watch a PR yourself. The thread that owns the PR watches it.
 
 ## A machine is free again
 
-A machine is free when its PR is merged or closed and its checkout is back on a clean `main`. The
-next preflight does that clean-up. Until then the machine holds its task, even when its thread has
-ended, because the user may send review fixes to that thread.
+A machine is free when its PR is merged or closed and every checkout on it is back on a clean
+`main`. The next preflight does that clean-up. Until then the machine holds its task, even when its
+thread has ended, because the user may send review fixes to that thread.
 
 ## Report
 
