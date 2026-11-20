@@ -55,11 +55,14 @@ aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
   `main` from a temporary clone, one server at a time, with its own database when migrations differ.
   Two copies of the app never run at once on one machine.
 - **Evidence goes to GitHub.** Screenshots and videos are attached to the PR with `gh --attach`, and
-  only when the task asks for them. No other host is used.
+  only when the task asks for them. "Full send" and "full stop" ask for them. No other host is used.
 - **Each project proves itself.** `create-verification-skill` writes a `verify-<app>` skill into a
   project: how to launch the app, how to drive it, and what proves each feature.
   `maintain-verification-skill` keeps it correct. `evidence-driven-testing` records and posts the
   proof.
+- **One flow per task.** `full-send` runs the skills in order: `new-feature`, the change,
+  `evidence-driven-testing` for proof, `sol-loop` when Sol can be reached, `file-pr`, then
+  `babysit-pr`. `greploop` runs only when you ask for a Greptile review.
 - **Merging.** `full-send` may merge the PR, and only when you say "full send". `full-stop` does the
   same work and never merges.
 - **Other models.** `council` and `sol-loop` ask other providers' models for review, through T3

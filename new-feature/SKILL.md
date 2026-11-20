@@ -57,9 +57,11 @@ Do not decide this from the branch prefix alone. Look at the branch's commits an
    Confirm the required runtime version. Install dependencies when the task's checks need them.
    Documentation-only work does not need the application's full toolchain.
 
-6. **Capture the before state** when the change affects what users see. The branch still matches
-   `main`, so run the app and take the before screenshots now. The tool takes two URLs, so give the
-   same page twice and keep the first image:
+6. **Capture the before state** when the change affects what users see. Do this only while the
+   branch still matches `main`. If the branch already holds edits, skip this step: a capture now
+   would show the change, not the before. The `before-and-after` skill has other ways to get the
+   baseline. Run the app and take the before screenshots. The tool takes two URLs, so give the same
+   page twice and keep the first image:
 
    ```bash
    npx @vercel/before-and-after "<url>" "<url>" -o ~/evidence/<task-name>/before
