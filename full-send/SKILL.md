@@ -38,7 +38,8 @@ harness or system approval prompt if one appears.
 ## Steps
 
 1. **Start the task.** Use the `new-feature` skill to get this task's branch and, for a visible
-   change, the before screenshots. If the work is already on its own branch, keep that branch.
+   change, the before screenshots. If the work is already on its own branch, keep that branch. If
+   the branch already holds edits, take no before screenshots.
 2. **Finish the change.** Complete the goal from the user's request with the smallest change that
    works. Fix the case that happened, not every case that could.
 3. **Prove it.** Get proof for every change you made. See "Proof".
