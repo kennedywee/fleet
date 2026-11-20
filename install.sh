@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# Installs this fleet's skills, upstream skills, instructions and plugins for the current user.
+# Installs this fleet's skills, upstream skills, instructions, plugins and remote MCP servers for
+# the current user.
 # Idempotent: run it after every pull. Each top-level folder with a SKILL.md is a skill, linked
 # into Claude Code, Codex and Antigravity. Links, not copies, so a pull updates every skill in
 # place.
 #
-#   ./install.sh            link everything, install missing plugins
+#   ./install.sh            link everything, install missing plugins and MCP servers
 #   ./install.sh --force    also replace skill folders that are real folders, not our links
 set -euo pipefail
 
@@ -98,3 +99,17 @@ if command -v claude >/dev/null 2>&1; then
 else
   echo "claude not found: plugins skipped" >&2
 fi
+
+# Remote MCP servers: `name url` per line, added at user scope. A name the agent already has is
+# kept, so a laptop's local server (Paper Desktop's `paper`) is not replaced by the remote one.
+while read -r name url; do
+  [ -z "${name:-}" ] || [[ "$name" == \#* ]] && continue
+  if command -v claude >/dev/null 2>&1 && ! claude mcp get "$name" </dev/null >/dev/null 2>&1; then
+    claude mcp add --scope user --transport http "$name" "$url" </dev/null >/dev/null &&
+      echo "added MCP $name to Claude Code: sign in with /mcp"
+  fi
+  if command -v codex >/dev/null 2>&1 && ! codex mcp get "$name" </dev/null >/dev/null 2>&1; then
+    codex mcp add "$name" --url "$url" </dev/null >/dev/null &&
+      echo "added MCP $name to Codex: sign in with codex mcp login $name"
+  fi
+done <"$fleet/mcp.txt"

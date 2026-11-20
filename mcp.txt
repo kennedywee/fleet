@@ -1,0 +1,4 @@
+# Remote MCP servers, one `name url` per line. install.sh adds each one to Claude Code and Codex at
+# user scope. It skips a name that the agent already has, so a local server of the same name stays.
+# Each server asks for a sign-in once per machine: `/mcp` in Claude Code, `codex mcp login <name>`.
+paper https://mcp.paper.design
