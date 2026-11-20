@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dispatch"
+  short_description: "Hand each task to its own linked machine"
+  default_prompt: "Use $dispatch to send these tasks to free machines, one task per machine."

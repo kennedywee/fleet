@@ -18,6 +18,7 @@ The skills:
 - **Rails:** `dhh-rails`.
 - **Writing:** `unslop`, `html-communication`, `html-upload`.
 - **Planning:** `grill-me`, `grilling`.
+- **Machines:** `dispatch`.
 - **This repo:** `fleet-sync`.
 
 Also here:
@@ -38,7 +39,8 @@ git clone https://github.com/kennedywee/fleet ~/fleet
 ```
 
 To update a machine, tell an agent on it "fleet sync". The `fleet-sync` skill pulls the checkout and
-runs `install.sh`. Nothing runs on a schedule: a machine changes only when you ask. By hand, the
+runs `install.sh`. Nothing runs on a schedule: a machine changes only when you ask. A "dispatch"
+request asks for it on the machines that get a task. By hand, the
 same update is `git -C ~/fleet pull && ~/fleet/install.sh`.
 
 `install.sh` links each skill folder, so a pull updates skills in place. It only replaces links it
@@ -50,6 +52,9 @@ aside as `<name>.bak.<time>`. Skills deleted from the fleet lose their links.
 - **One machine per task, no worktrees.** Each feature runs on its own t3boat VM, so the VM is the
   isolation. `new-feature` makes a branch in the machine's checkout and stops if the checkout holds
   another task's work. `modernize`, `greploop` and `before-and-after` follow the same rule.
+- **One thread hands out the tasks.** `dispatch` gives each task to a free machine that is linked in
+  T3 Code, and starts one thread there in the main checkout. First it syncs the fleet on that
+  machine and checks that the checkout is a clean `main`. It never creates or deletes a machine.
 - **Before screenshots first.** `new-feature` captures the "before" while the branch still matches
   `main`. `before-and-after` reuses it, or uses a deployed baseline, and only as a last resort runs
   `main` from a temporary clone, one server at a time, with its own database when migrations differ.
