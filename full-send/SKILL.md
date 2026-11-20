@@ -37,20 +37,24 @@ harness or system approval prompt if one appears.
 
 ## Steps
 
-1. **Finish the change.** Complete the goal from the user's request with the smallest change that
-   works. Fix the case that happened, not every case that could. If you are on the default branch,
-   create a branch first.
-2. **Prove it.** Get proof for every change you made. See "Proof".
-3. **Get feedback.** Use the `sol-loop` skill to verify the changes.
-4. **File the PR** with the `file-pr` skill. Rebase onto the latest default branch first. Add one
-   short line to the description that says how you proved the change.
-5. **Babysit the PR** with the `babysit-pr` skill. Fix real findings and CI failures. Get proof for
-   each fix before you push it.
-6. **Merge** when the merge gate passes.
-7. **Report** in your final message: the PR link, the merge commit, your proof, and each decision
-   you made for the user.
+1. **Start the task.** Use the `new-feature` skill to get this task's branch and, for a visible
+   change, the before screenshots. If the work is already on its own branch, keep that branch.
+2. **Finish the change.** Complete the goal from the user's request with the smallest change that
+   works. Fix the case that happened, not every case that could.
+3. **Prove it.** Get proof for every change you made. See "Proof".
+4. **Get feedback.** Use the `sol-loop` skill to verify the changes. If no route runs Sol, skip this
+   step. Do not substitute another model.
+5. **File the PR** with the `file-pr` skill. Rebase onto the latest default branch first. Add one
+   short line to the description that says how you proved the change. Attach the evidence. See
+   "Proof".
+6. **Babysit the PR** with the `babysit-pr` skill. Fix real findings and CI failures. Get proof for
+   each fix before you push it. Use the `greploop` skill only when the user's request asks for a
+   Greptile review.
+7. **Merge** when the merge gate passes.
+8. **Report** in your final message: the PR link, the merge commit, your proof, and each decision
+   you made for the user. If you skipped the Sol review, say so first.
 
-Stay active from step 1 to step 7. If you end your turn while checks or bots are pending, the work
+Stay active from step 1 to step 8. If you end your turn while checks or bots are pending, the work
 stops, because nobody will prompt you again. Wait with the watcher from `babysit-pr`, so something
 wakes you when the PR changes. In T3 Code that is `watch_pull_request`. If you stop before the
 merge, call `unwatch_pull_request` first.
@@ -64,9 +68,16 @@ screenshot. Use the most direct proof the change allows:
 - Run the checks that the repo's CI runs (typecheck, lint, tests).
 - Add one focused test that fails without the fix, when the behavior has none and the repo has a
   test setup.
-- For UI and runtime behavior, run the app and look at the change. Green mocked tests do not prove
-  that the user experience works. Attach screenshots to the PR when they help, with `gh pr edit
-  --attach`.
+- For changed runtime behavior, use the `evidence-driven-testing` skill. It follows the project's
+  `verify-<app>` skill when one exists, and its own methods when none does. Green mocked tests do
+  not prove that the user experience works.
+- For a change that users can see, also use the `before-and-after` skill. Reuse the before
+  screenshots from the `new-feature` skill.
+- For a change to documentation or configuration only, the repo's checks are enough. Record
+  nothing.
+
+This request includes the PR as a destination for the evidence. Attach the recording and the
+screenshot pairs to the PR, as those skills describe.
 
 When you cannot find a way to prove a change, you do not have full confidence. Ask the user.
 
