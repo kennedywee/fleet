@@ -21,6 +21,7 @@ of other work.
 3. **Pull.** Run `git -C "$fleet" pull --ff-only`.
 4. **Install.** Run `"$fleet/install.sh"`. It links each skill, removes the links of skills that
    left the fleet, links the global instructions, and installs missing upstream skills and plugins.
+   It also adds the missing remote MCP servers from `mcp.txt`.
 5. **Check.** List the links in `~/.claude/skills`, `~/.codex/skills` and
    `~/.gemini/config/skills`, and confirm that none points at a missing folder.
 
@@ -42,6 +43,8 @@ Tell the user:
 - the commits that the pull brought in, from `git log --oneline <old>..HEAD`, or that the checkout
   was already current;
 - each link that `install.sh` added or removed, and each folder that it skipped;
+- each MCP server that `install.sh` added, and that it needs a sign-in on this machine: `/mcp` in
+  Claude Code, `codex mcp login <name>` in Codex;
 - local commits that are not pushed, and uncommitted changes;
 - that a running agent session loads new skills only after it restarts.
 

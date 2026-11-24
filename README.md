@@ -26,12 +26,27 @@ Also here:
 
 - `AGENTS.md`: global instructions, linked as `~/.codex/AGENTS.md` and `~/.claude/CLAUDE.md`.
 - `plugins.txt` and `marketplaces.txt`: Claude Code plugins to install, and where from.
+- `mcp.txt`: remote MCP servers (Paper's `https://mcp.paper.design`). `install.sh` adds each one
+  to Claude Code and Codex at user scope, and skips a name the agent already has. Each machine signs
+  in once: `/mcp` in Claude Code, `codex mcp login paper` in Codex.
 - `skills.txt`: upstream skills we use but do not keep here (`security-audit`, `ui-sdk`).
   `install.sh` installs them for Claude Code, Codex and Antigravity with `npx skills`;
   `npx skills update -g` updates them.
 
 **Not in the fleet** (laptop only): `omarchy`, `omarchy-app`, `diagnose-crash`, `superwhisper`. They
 control the Omarchy desktop and come with Omarchy and Superwhisper themselves.
+
+**Paper Desktop** (laptop only): with Paper Desktop installed, use its local MCP server instead of
+the remote one. It is faster and acts on the open file. Add it under the name `paper`, so
+`install.sh` keeps it. Remove the remote entry first if it is there:
+
+```sh
+claude mcp remove paper -s user; claude mcp add --scope user paper -- ~/.paper/bin/paper mcp
+codex mcp remove paper; codex mcp add paper -- ~/.paper/bin/paper mcp
+```
+
+Do not use Paper's `paper-desktop` plugin for this. Its server has another name, so the machine
+would get both.
 
 ## Install on a machine
 
