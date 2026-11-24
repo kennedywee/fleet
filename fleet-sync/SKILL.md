@@ -12,16 +12,17 @@ of other work.
 ## Steps
 
 1. **Find the checkout.** This skill is a link into the fleet checkout. Resolve it:
-   `fleet="$(dirname "$(readlink -f ~/.claude/skills/fleet-sync)")"`. On a machine with Codex only,
-   use `~/.codex/skills/fleet-sync`. Confirm that `$fleet/install.sh` exists.
+   `fleet="$(dirname "$(readlink -f ~/.claude/skills/fleet-sync)")"`. On a machine without Claude
+   Code, use `~/.codex/skills/fleet-sync` or `~/.gemini/config/skills/fleet-sync`. Confirm that
+   `$fleet/install.sh` exists.
 2. **Look before you pull.** Run `git -C "$fleet" status --short --branch` and record the current
    commit with `git -C "$fleet" rev-parse HEAD`. Use the cases below when the checkout is not clean
    or not on `main`.
 3. **Pull.** Run `git -C "$fleet" pull --ff-only`.
 4. **Install.** Run `"$fleet/install.sh"`. It links each skill, removes the links of skills that
    left the fleet, links the global instructions, and installs missing upstream skills and plugins.
-5. **Check.** List the links in `~/.claude/skills` and `~/.codex/skills`, and confirm that none
-   points at a missing folder.
+5. **Check.** List the links in `~/.claude/skills`, `~/.codex/skills` and
+   `~/.gemini/config/skills`, and confirm that none points at a missing folder.
 
 ## Cases
 
